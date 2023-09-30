@@ -1,13 +1,17 @@
 let density = 50,
     sparks = [],
     counter = 0,
-    timing = Math.floor((Math.random() * 1000) - 300);
+    timing = Math.floor((Math.random() * 2000) - 200);
+
+if(timing <= 0){
+    timing = 75;
+}
 
 window.addEventListener("load", () => {
 
     window.addEventListener('keydown', () => {
         document.querySelector('.logo').classList.add('hidden');
-        document.querySelector('.main-wrapper').classList.remove('hidden');
+        document.querySelector('.login-wrapper').classList.remove('hidden');
     });
 
     animate();
@@ -35,10 +39,10 @@ const animate = () => {
         counter++;
     } else {
         counter = 0;
-        timing = Math.floor((Math.random() * 1000) - 300);
+        timing = Math.floor((Math.random() * 1000) - 200);
 
         if(timing <= 0){
-            timing = 250;
+            timing = 75;
         }
     }
 

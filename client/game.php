@@ -7,7 +7,7 @@
     require_once("partial/header.php");
 ?>
 
-<!-- <script src="js/game.js"></script> -->
+<script src="js/game.js"></script>
 
 <canvas></canvas>
 <div class="main-wrapper">

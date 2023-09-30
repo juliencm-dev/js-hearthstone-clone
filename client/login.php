@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="main-wrapper hidden">
+<div class="login-wrapper hidden">
     <form class="login-box" action="#" method="POST">
       <?php 
           if ($data["hasConnectionError"]) {
