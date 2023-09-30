@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="main-wrapper">
+<div class="main-wrapper hidden">
     <form class="login-box" action="#" method="POST">
       <?php 
           if ($data["hasConnectionError"]) {
@@ -27,15 +27,15 @@
           }
       ?>
       <div>
-        <label for="username">Nom d'usager</label>
-        <div class="login-label">
+        <label class="login-label" for="username">Nom d'usager</label>
+        <div class="input-wrapper">
           <input id="username" name="username" class="input-field">
         </div>
       </div>
 
       <div>
-        <label for="pwd">Mot de passe </label>
-        <div class="login-label">
+        <label class="login-label" for="pwd">Mot de passe </label>
+        <div class="input-wrapper">
           <input id="pwd" name="pwd" type="password" class="input-field">
         </div>
       </div>

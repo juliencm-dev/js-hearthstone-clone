@@ -1,15 +1,20 @@
 let density = 50,
     sparks = [],
-    counter = 0;
-    timing = Math.floor((Math.random() * 1000) - 500);
+    counter = 0,
+    timing = Math.floor((Math.random() * 1000) - 300);
 
 window.addEventListener("load", () => {
+
+    window.addEventListener('keydown', () => {
+        document.querySelector('.logo').classList.add('hidden');
+        document.querySelector('.main-wrapper').classList.remove('hidden');
+    });
 
     animate();
 
 })
 
-function animate() {
+const animate = () => {
 
     if (sparks.length < density && counter === timing) {
         for (let i = 0; i < density; i++) {
@@ -30,14 +35,14 @@ function animate() {
         counter++;
     } else {
         counter = 0;
-        timing = Math.floor((Math.random() * 1000) - 400);
+        timing = Math.floor((Math.random() * 1000) - 300);
 
         if(timing <= 0){
             timing = 250;
         }
     }
 
-    console.log(counter);
+    console.log(sparks);
     window.requestAnimationFrame(animate);
 
 }

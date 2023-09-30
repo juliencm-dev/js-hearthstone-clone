@@ -6,11 +6,11 @@ class Spark{
         }
 
         this.node = document.createElement('div');
-        this.node.classList.add("spark");
+        this.node.classList.add('spark');
 
         this.velocity={
             x: (Math.random() * 3) * ((Math.floor(Math.random() * 2)) == 0 ? 1 : -1),   // Assigne une vélocitée aléatoire en x
-            y: -15,
+            y: -15
         };
 
         this.gravity = Math.random();
