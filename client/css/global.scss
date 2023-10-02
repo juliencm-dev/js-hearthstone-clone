@@ -4,8 +4,8 @@ html{
 
 body{
     min-height: 100vh;
-    overflow: hidden;
     background-color: #040301;
+    overflow: hidden;
 }
 
 .spark {
@@ -90,16 +90,33 @@ body{
 }
 
 .bg-image{
-    position: absolute;
-    top:0;
-    left:0;
-    width: 100%;
+    position: relative;
+    width: 100vw;
     height: 100vh;
-    background-image: url(../img/magix-splash-screen.png);
-    background-size: cover;
-    filter: grayscale(35%);
-    animation: saturate 20s ease-in-out infinite;
-    z-index: -1;
+}
+
+.bg-1,
+.bg-2,
+.bg-3,
+.bg-4,
+.bg-5{
+    position: absolute;
+    width: 2700px;
+    top:50%;
+    left:50%;
+    // transform: translate(-50%, -50%);
+}
+
+.smoke{
+    position: absolute;
+    width: 2700px;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.bg-5{
+    z-index: 10;
 }
 
 #logo-magix{
@@ -147,7 +164,7 @@ body{
     align-items: center;
     gap: 1.3rem;
 
-    background-image: url(../img/magix-login-bg.png);
+    background-image: url(../img/ui/magix-login-bg.png);
     background-size: cover;
     background-position: center;
 
@@ -235,7 +252,8 @@ body{
     left:0px;
     width: 100vw;
     height: 100vh;
-    background-image: url(../img/ui/magix-lobby-bg-empty.png);
+    background-image: url(../img/ui/magix-lobby-front.png);
+    aspect-ratio: auto;
     background-size: cover;
     z-index: -1;
 }
