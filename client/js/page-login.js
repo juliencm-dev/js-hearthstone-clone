@@ -1,7 +1,8 @@
 let density = 50,
     sparks = [],
     counter = 0,
-    timing = Math.floor((Math.random() * 2000) - 200);
+    timing = Math.floor((Math.random() * 2000) - 200)
+    smokeVelX = 0.2;
 
 if(timing <= 0){
     timing = 75;
@@ -13,6 +14,22 @@ window.addEventListener("load", () => {
         document.querySelector('.logo').classList.add('hidden');
         document.querySelector('.login-wrapper').classList.remove('hidden');
     });
+
+    let posX = 0, posY = 0
+
+    window.addEventListener('mousemove', e => {
+        const nodeList = document.querySelectorAll('.parallax');
+        posX = e.clientX - window.innerWidth / 2;
+        posY = e.clientY - window.innerHeight / 2;
+        
+        nodeList.forEach((elem) => {
+            let velX = elem.dataset.speedx;
+            let velY = elem.dataset.speedy;
+            
+            elem.style.transform = `translateX(calc(-50% + ${-posX * velX}px)) translateY(calc(-50% + ${posY * velY}px))`;
+        })
+
+    })
 
     animate();
 
@@ -45,8 +62,6 @@ const animate = () => {
             timing = 75;
         }
     }
-
-    console.log(sparks);
     window.requestAnimationFrame(animate);
 
 }

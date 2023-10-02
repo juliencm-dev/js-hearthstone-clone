@@ -11,7 +11,16 @@
 <script src="js/classes/Spark.js"></script>
 <script src="js/page-login.js"></script>
 
-<div class="bg-image"></div>
+<div class="bg-image">
+  <img src="./img/background/front-page/bg_0006_bg-1.png" class="parallax bg-1" data-speedx="0.02" data-speedy="0.02" >
+  <img src="./img/background/front-page/bg_0005_bg-2.png" class="parallax bg-2" data-speedx="0.015" data-speedy="0.015">
+  <img src="./img/background/front-page/bg_0004_bg-3.png" class="parallax bg-3" data-speedx="0.01" data-speedy="0.01">
+  <img src="./img/background/front-page/bg_0003_bg-4.png" class="smoke">
+  <img src="./img/background/front-page/bg_0002_bg-5.png" class="parallax bg-4" data-speedx="0.005" data-speedy="0.005">
+  <img src="./img/background/front-page/bg_0001_bg-6.png" class="smoke">
+  <img src="./img/background/front-page/bg_0000_bg-7.png" class="parallax bg-5" data-speedx="0.002" data-speedy="0.002">
+</div>
+
 <div class="logo">
   <img src="./img/magix-logo.png" id="logo-magix">
 </div>
