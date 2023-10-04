@@ -14,7 +14,9 @@
             $data["key"] = $key;
 
             if(!empty($_POST["username"])){
-                $data["username"] = $_POST["username"];
+                $_SESSION["observer"] = $_POST["username"];
+                $data["username"] = $_SESSION["observer"];
+                
                 $result = parent::callAPI("games/observe", $data);
                 
                 if ($result == "WAITING") {

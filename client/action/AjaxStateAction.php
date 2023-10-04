@@ -10,7 +10,20 @@
         protected function executeAction() {
 
             $data["key"] = $_SESSION["key"];
-            $result = parent::callAPI("games/state", $data);
+
+            if (!empty($_SESSION['observer'])) {
+                $data["username"] = $_SESSION["observer"];
+                $result = parent::callAPI("games/observe", $data);
+
+                if ($result == "NOT_IN_GAME"){
+                    $_SESSION['observer'] = "";
+                    header("location:index.php");
+                    exit;
+                }
+
+            }else{
+                $result = parent::callAPI("games/state", $data);
+            }
             
             return compact('result');
            
