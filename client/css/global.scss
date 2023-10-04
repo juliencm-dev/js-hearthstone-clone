@@ -4,7 +4,7 @@ html{
 
 body{
     min-height: 100vh;
-    background-color: #040301;
+    background-color: #ececec;
     overflow: hidden;
 }
 
@@ -101,7 +101,7 @@ body{
 .bg-4, 
 .bg-5{
     position: absolute;
-    width: clamp(2000px, 100vw, 2700px);
+    width: clamp(2100px, 100vw, 2700px);
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
@@ -109,10 +109,10 @@ body{
 
 .smoke{
     position: absolute;
-    width: clamp(2000px, 100vw, 2700px);
+    width: clamp(2100px, 100vw, 2700px);
     top:50%;
     left:50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .bg-5{

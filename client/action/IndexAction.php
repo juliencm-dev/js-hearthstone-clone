@@ -1,55 +1,37 @@
 <?php
-    require_once("action/CommonAction.php");
+	require_once("action/CommonAction.php");
 
-    class IndexAction extends CommonAction {
+	class IndexAction extends CommonAction {
+		
+		public function __construct() {
+			parent::__construct(CommonAction::$VISIBILITY_PUBLIC);
+		}
 
-        public function __construct() {
-            parent::__construct(CommonAction::$VISIBILITY_MEMBER);
-        }
+		protected function executeAction() {
+			$hasConnectionError = false;
 
-        protected function executeAction() {
-            $key = $_SESSION["key"];
-            $errorMessage = "";
-            $data = [];
-            $data["key"] = $key;
+			if (isset($_POST["username"])) {
+				$user = [];
+				$user["username"] = $_POST["username"];
+				$user["password"] = $_POST["pwd"];
+				
+				if(!empty($user)){
+					$result = parent::callAPI("signin", $user);
 
-            if(!empty($_POST["username"])){
-                $_SESSION["observer"] = $_POST["username"];
-                $data["username"] = $_SESSION["observer"];
-                
-                $result = parent::callAPI("games/observe", $data);
-                
-                if ($result == "WAITING") {
-                    $errorMessage = "En attente d’un autre joueur";
-                }
-                elseif($result == "NOT_IN_GAME"){
-                    $errorMessage = "Le joueur n’est pas dans une partie";
-                }
-                else {
-                    header("location:game.php");
-                    exit;
-                }
-            }
+					if ($result == "INVALID_USERNAME_PASSWORD") {
+						$hasConnectionError = true;
+					}
+					else {
+						// var_dump($result);exit;
+						$_SESSION["username"] = $user["username"];
+						$_SESSION["key"] = $result->key; 
+						$_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;
+						header("location:lobby.php");
+						exit;
+					}
+				}
+			}
 
-            if(!empty($_POST["gameMode"])){
-
-                if(!empty($_POST["privateKey"])){
-                    $data["privateKey"] = $_POST["gameMode"];
-                }
-
-                $data["type"] = $_POST["gameMode"];
-
-                $result = parent::callAPI("games/auto-match", $data);
-                
-                if ($result == "DECK_INCOMPLETE") {
-                    $errorMessage = "Votre Deck n'est pas complet!";
-                }
-                else {
-                    header("location:game.php");
-                    exit;
-                }
-
-            }
-            return compact("key", "errorMessage");
-    }
-}
+			return compact("hasConnectionError");
+		}
+	}

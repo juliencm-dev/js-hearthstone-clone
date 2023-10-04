@@ -4,7 +4,7 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: #040301;
+  background-color: #ececec;
   overflow: hidden;
 }
 
@@ -97,7 +97,7 @@ body {
 .bg-4,
 .bg-5 {
   position: absolute;
-  width: clamp(2000px, 100vw, 2700px);
+  width: clamp(2100px, 100vw, 2700px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -105,7 +105,7 @@ body {
 
 .smoke {
   position: absolute;
-  width: clamp(2000px, 100vw, 2700px);
+  width: clamp(2100px, 100vw, 2700px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -234,7 +234,8 @@ body {
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background-image: url(../img/bg-lobby.png);
+  background-image: url(../img/ui/magix-lobby-bg-empty.png);
+  aspect-ratio: auto;
   background-size: cover;
   z-index: -1;
 }
@@ -307,6 +308,4 @@ body {
 
 .hidden {
   display: none;
-}
-
-/*# sourceMappingURL=global.css.map */
+}/*# sourceMappingURL=global.css.map */

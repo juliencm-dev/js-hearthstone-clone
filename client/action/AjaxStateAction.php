@@ -17,7 +17,7 @@
 
                 if ($result == "NOT_IN_GAME"){
                     $_SESSION['observer'] = "";
-                    header("location:index.php");
+                    header("location:lobby.php");
                     exit;
                 }
 
