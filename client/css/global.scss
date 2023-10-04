@@ -101,14 +101,15 @@ body{
 .bg-4, 
 .bg-5{
     position: absolute;
-    width: 2700px;
+    width: clamp(2000px, 100vw, 2700px);
     top:50%;
     left:50%;
+    transform: translate(-50%,-50%);
 }
 
 .smoke{
     position: absolute;
-    width: 2700px;
+    width: clamp(2000px, 100vw, 2700px);
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
