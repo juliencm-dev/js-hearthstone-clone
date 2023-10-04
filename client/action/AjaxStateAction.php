@@ -8,12 +8,11 @@
         }
 
         protected function executeAction() {
-            $data = [];
-            $data["key"] = $_SESSION["key"];
 
+            $data["key"] = $_SESSION["key"];
             $result = parent::callAPI("games/state", $data);
             
-            echo json_encode($result);
+            return compact('result');
            
         }
 }

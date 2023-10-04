@@ -2,6 +2,7 @@
     require_once("action/AjaxStateAction.php");
 
     $action = new AjaxStateAction();
-    $action->execute();
+    $data = $action->execute();
 
+    echo json_encode($data['result']);
 ?>
