@@ -101,7 +101,7 @@ body{
 .bg-4, 
 .bg-5{
     position: absolute;
-    width: clamp(2100px, 100vw, 2700px);
+    width: 2700px;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
@@ -109,7 +109,7 @@ body{
 
 .smoke{
     position: absolute;
-    width: clamp(2100px, 100vw, 2700px);
+    width: 2700px;
     top:50%;
     left:50%;
     transform: translate(-50%, -50%);
@@ -252,10 +252,16 @@ body{
     left:0px;
     width: 100vw;
     height: 100vh;
-    background-image: url(../img/ui/magix-lobby-bg-empty.png);
+    background-image: url(../img/bg-lobby.png);
+    filter: drop-shadow(10px 10px 10px black);
     aspect-ratio: auto;
     background-size: cover;
-    z-index: -1;
+    z-index: 10;
+}
+
+.greyscale{
+    filter: grayscale(60%);
+    width: 2500px;
 }
 
 .overlay{
@@ -265,10 +271,11 @@ body{
     width: 100%;
     height: 100%;
     background-color: rgba(193, 193, 193, 0.489);
+    z-index: 800;
 }
 
 #deck-builder-frame{
-    background-color: rgba(127, 140, 177, 1);
+    background-color: rgb(72, 49, 42);
     position: absolute;
     top: 5%;
     left: 5%;
@@ -281,6 +288,7 @@ body{
     left: 25%;
 
     transform: translate(-60%, -50%);
+    z-index: 15;
 }
 
 #mode-wrapper, #logout-wrapper, #play-menu-wrapper{
@@ -331,3 +339,9 @@ body{
     display: none;
 }
 
+.main-wrapper{
+    position: absolute;
+    top:10%;
+    left:40%;
+    z-index: 12;
+}

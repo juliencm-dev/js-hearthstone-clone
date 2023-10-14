@@ -18,7 +18,7 @@
   <img src="./img/background/front-page/bg_0003_bg-4.png" class="smoke">
   <img src="./img/background/front-page/bg_0002_bg-5.png" class="parallax bg-4" data-speedx="0.015" data-speedy="0.005">
   <img src="./img/background/front-page/bg_0001_bg-6.png" class="smoke">
-  <img src="./img/background/front-page/bg_0000_bg-7.png" class="parallax bg-5" data-speedx="0.012" data-speedy="0.002">
+  <img src="./img/background/front-page/bg_0000_bg-7.png" class="parallax bg-5" data-speedx="0.0120" data-speedy="0.002">
 </div>
 
 <div class="logo">

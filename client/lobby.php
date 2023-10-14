@@ -13,6 +13,15 @@
                 <iframe id="deck" style="height:90vh; width:90vw; " src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
         </div>
     </div>
+    <div class="bg-image">
+        <img src="./img/background/front-page/bg_0006_bg-1.png" class="parallax bg-1 greyscale" data-speedx="0.05" data-speedy="0.02" >
+        <img src="./img/background/front-page/bg_0005_bg-2.png" class="parallax bg-2 greyscale" data-speedx="0.03" data-speedy="0.015">
+        <img src="./img/background/front-page/bg_0004_bg-3.png" class="parallax bg-3 greyscale" data-speedx="0.02" data-speedy="0.01">
+        <img src="./img/background/front-page/bg_0003_bg-4.png" class="smoke greyscale">
+        <img src="./img/background/front-page/bg_0002_bg-5.png" class="parallax bg-4 greyscale" data-speedx="0.015" data-speedy="0.005">
+        <img src="./img/background/front-page/bg_0001_bg-6.png" class="smoke greyscale">
+        <img src="./img/background/front-page/bg_0000_bg-7.png" class="parallax bg-5 greyscale" data-speedx="0.0120" data-speedy="0.002">
+    </div>
 
     <div class="lobby-bg"></div>
 
