@@ -101,7 +101,7 @@ const jouerCarte = (uid) => {
     })
     .then(response => response.json())
     .then(data => {
-        location.href = "/lobby.php"
+        updateUI(data);
     })
 }
 
