@@ -42,7 +42,7 @@
             </form>
         </div>
     
-        <div class="main-wrapper" id="index-wrapper">
+        <div id="lobby-wrapper">
     
             <?php 
                 if ($data["errorMessage"]) {

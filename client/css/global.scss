@@ -303,7 +303,12 @@ body{
     gap: 0.5rem;
 }
 
-#index-wrapper{
+#lobby-wrapper{
+    position: absolute;
+    top:10%;
+    left:40%;
+    z-index: 12;
+
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -339,9 +344,201 @@ body{
     display: none;
 }
 
-.main-wrapper{
+
+/* 
+    game.php
+*/
+
+
+#game-wrapper{
     position: absolute;
-    top:10%;
-    left:40%;
-    z-index: 12;
+    top: 50%;
+    left:50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #de8900;
 }
+
+#opponent{
+    position: absolute;
+    top:0;
+    left:0;
+
+    width: 100vw;
+    height: 25vh;
+
+    background-color: #ffc972;
+}
+
+#user{
+    position: absolute;
+    top:75vh;
+    left:0;
+
+    width: 100vw;
+    height: 25vh;
+
+    background-color: #ffc972;
+
+    #mana-wrapper{
+        position: absolute;
+
+        display: flex;
+        align-items: center;
+        
+        top: calc(100% - 5vh);
+        left: calc(100% - calc(5.5rem + 27vh) - 0.8rem);
+        height: 4vh;
+        width: calc(5.5rem + 27vh);
+    
+        background-color: #2e6ca5c5;
+
+        #user-mana{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap:0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .mana-count{
+            background-color: #0f8bffc5;
+            height: 2.5vh;
+            width: 2.5vh;
+            border-radius: 50%;
+            border: 1px solid #122a41c5;
+        }
+    
+    }
+    
+}
+
+#battlefield{
+    position: relative;
+    top:25vh;
+    left:0;
+
+    width: 100vw;
+    height: 50vh;
+
+    background-color:#8b5245;
+
+    #stat-wrapper{
+        position: absolute;
+        top:50%;
+        left: 0.5%;
+
+        transform: translateY(-50%);
+
+        display: flex;
+        flex-direction: column;
+        gap:5rem;
+
+        #opponent-life, #user-life{
+            text-align: center;
+            line-height: 8.5vh;
+
+            padding: 0;
+            margin: 0;
+
+            background-color: #a71a0862;
+            height: 8vh;
+            width: 8vh;
+            border-radius: 50%;
+            font-size: 2rem;
+            margin-left: 2vw;
+        }
+    }
+
+    #turn-state-wrapper{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        #turn-timer{
+            font-size: 3rem;
+        }
+
+        #end-turn{
+            display: inline-block;
+            outline: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            height: 2.3rem;
+            color: #fef9dd;
+            border:solid #2f1b10 0.5px;
+            background-color: #754124;
+            transition: background-color .17s ease,color .17s ease;
+            box-shadow: rgba(6, 6, 6, 0.575) 0px 2px 8px 0px;
+            
+            &:hover{
+                background-color: #3d2315;
+            }
+
+        }
+    }
+
+    #opponent-field{
+        position: absolute;
+        width: 60vw;
+        height: 24.25vh;
+
+        top: 0.5vh;
+        left: 50%;
+        transform: translateX(-50%);
+
+        background-color: #856f64;
+
+    }
+
+    #user-field{
+        position: absolute;
+        width: 60vw;
+        height: 24.25vh;
+
+        top: calc(100% - 24.75vh);
+        left: 50%;
+        transform: translateX(-50%);
+
+        background-color: #856f64;
+
+    }
+
+
+}
+
+#user-hand{
+    position: absolute;
+    width: auto;
+    height: 24.25vh;
+
+    top: calc(100% - 24.75vh);
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    .carte-wrapper{
+        height: 90%;
+        width: calc(70vw/8 - 1rem);
+    
+        background-color: #04030144;
+        border-radius: 0.5rem;
+    
+    }
+}
+
+
+
+
+
