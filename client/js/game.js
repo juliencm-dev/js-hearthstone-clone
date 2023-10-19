@@ -24,7 +24,8 @@ const state = () => {
 
         updateUI(data);
 
-        setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
+        if (data != "LAST_GAME_LOST")
+            setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
         })
 }
 
