@@ -125,38 +125,6 @@ body{
 	animation: pulse 4s ease-in-out infinite;
 }
 
-@keyframes saturate{
-    0% {
-        filter: grayscale(35%);
-    }
-    25% {
-        filter: grayscale(30%);
-    }
-    50% {
-        filter: grayscale(45%);
-    }
-    75% {
-        filter: grayscale(30%);
-    }
-    100%{
-        filter: grayscale(40%);
-    } 
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    25% {
-        transform: scale(1.01);
-    }
-    50% {
-        transform: scale(1);
-    }
-    75% {
-        transform: scale(1.01);
-    }
-}
 
 .login-box{
     display: flex;
@@ -547,7 +515,8 @@ body{
             scale: 1.2;
             transform: translateY(-50px);
             z-index: 1000;
-            filter: drop-shadow(5px 5px 50px rgba(82, 201, 228, 1));        }
+            filter: drop-shadow(5px 5px 50px rgba(82, 201, 228, 1));       
+        }
         
         .attack{
             position:absolute;
@@ -607,6 +576,13 @@ body{
         }
     }
 
+    .is-useable{
+        border: solid 4px rgb(172, 255, 47);
+        border-radius: 15px;
+
+        animation: opacity-pulse 2s linear infinite;
+    }
+
     .minion-image{
         position: relative;
         width: 85%;
@@ -615,6 +591,46 @@ body{
         z-index: 1;
     }
 }
+
+
+
+/*
+    animations
+*/
+
+@keyframes saturate{
+    0% {
+        filter: grayscale(35%);
+    }
+    25% {
+        filter: grayscale(30%);
+    }
+    50% {
+        filter: grayscale(45%);
+    }
+    75% {
+        filter: grayscale(30%);
+    }
+    100%{
+        filter: grayscale(40%);
+    } 
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.01);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.01);
+    }
+}
+
 
 
 

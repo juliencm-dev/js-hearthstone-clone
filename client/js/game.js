@@ -62,6 +62,11 @@ const updateUI = (gameState) => {
                 })
 
                 let newCardNode = newCard.buildCard()
+                console.log(newCard.cost);
+                if(newCard.cost <= gameState.mp){
+                    console.log("working");
+                    newCardNode.classList.add('is-useable');
+                }
 
                 newCardNode.addEventListener('click', () => {
                     playCard(currentCard.uid);
