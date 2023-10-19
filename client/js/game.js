@@ -1,4 +1,19 @@
-let timer, opponentMana, opponentHP, userMana, userHP, btnEndTurn, btnSurrender;
+let timer, opponentMana, opponentHP, userMana, userHP, btnEndTurn, btnSurrender, oldHand = [];
+
+window.addEventListener("load", () => {
+    timer = document.querySelector("#turn-timer");
+    opponentMana = document.querySelector("#opponent-mana");
+    opponentHP = document.querySelector("#opponent-life");
+    userMana = document.querySelector("#user-mana");
+    userHP = document.querySelector("#user-life");
+    userHand = document.querySelector('#user-hand')
+
+    document.querySelector("#end-turn").addEventListener("click", endTurn);
+    document.querySelector("#surrender").addEventListener("click", surrender);
+    
+    setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
+});
+
 const state = () => {
     fetch("ajax-state.php", {   // Il faut créer cette page et son contrôleur appelle 
             method : "POST"        // l’API (games/state)
@@ -31,34 +46,44 @@ const updateUI = (gameState) => {
             currentTotalMana.classList.add('mana-count');
             userMana.append(currentTotalMana);
         }
+        
+        if(checkHandHasChanged(gameState.hand)){     
+            userHand.innerHTML = "";
+            for (let i = 0 ; i < gameState.hand.length ; i++){
+                let currentCard = gameState.hand[i];
 
-        userHand.innerHTML = "";
-        for (let i = 0 ; i < gameState.hand.length ; i++){
-            newCardNode = document.createElement('div')
-            newCardNode.classList.add('carte-wrapper');
-            newCardNode.addEventListener('click', () => {
-                jouerCarte(gameState.hand[i].uid);
-            })
-            userHand.append(newCardNode);
+                let newCard = new Card({
+                    id: currentCard.id,
+                    uid: currentCard.uid,
+                    atk: currentCard.atk,
+                    cost: currentCard.cost,
+                    baseHP: currentCard.baseHP,
+                    mechanics: currentCard.mechanics
+                })
+
+                let newCardNode = newCard.buildCard()
+
+                newCardNode.addEventListener('click', () => {
+                    playCard(currentCard.uid);
+                })
+
+                userHand.append(newCardNode);
+            }
+
+            oldHand = gameState.hand.map(card => ({ ...card }));
         }
-
     }
 }
 
-window.addEventListener("load", () => {
-    timer = document.querySelector("#turn-timer");
-    opponentMana = document.querySelector("#opponent-mana");
-    opponentHP = document.querySelector("#opponent-life");
-    userMana = document.querySelector("#user-mana");
-    userHP = document.querySelector("#user-life");
-    userHand = document.querySelector('#user-hand')
+const checkHandHasChanged = (newHand) => {
+    if (newHand.length !== oldHand.length) { return true }
 
-    document.querySelector("#end-turn").addEventListener("click", endTurn);
-    document.querySelector("#surrender").addEventListener("click", surrender);
+    for (let i = 0; i < newHand.length; i++) {
+        if (newHand[i].uid !== oldHand[i].uid) { return true }
+    }
     
-    setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
-});
-
+    return false;
+}
 
 const endTurn = () => {
     formData = new FormData();
@@ -70,8 +95,6 @@ const endTurn = () => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log("end turn :", data);
-
         updateUI(data);
     })
 }
@@ -90,7 +113,7 @@ const surrender = () => {
     })
 }
 
-const jouerCarte = (uid) => {
+const playCard = (uid) => {
     formData = new FormData();
     formData.append("type", "PLAY");
     formData.append("uid", uid);

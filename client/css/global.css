@@ -97,7 +97,8 @@ body {
 .bg-4,
 .bg-5 {
   position: absolute;
-  width: 2700px;
+  height: auto;
+  width: 105vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -461,11 +462,69 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  /*
+      Template de cartes:
+  */
 }
 #user-hand .carte-wrapper {
-  height: 90%;
-  width: calc(8.75vw - 1rem);
-  background-color: rgba(4, 3, 1, 0.2666666667);
-  border-radius: 0.5rem;
+  position: relative;
+  height: 100%;
+  width: calc(9vw - 1rem);
+  background-size: cover;
+  z-index: 100;
+  transition: all ease-in-out 400ms;
+}
+#user-hand .carte-wrapper:hover {
+  scale: 1.2;
+  transform: translateY(-50px);
+  z-index: 1000;
+  filter: drop-shadow(5px 5px 50px rgb(82, 201, 228));
+}
+#user-hand .carte-wrapper .attack {
+  position: absolute;
+  top: 3.5%;
+  left: 8%;
+  color: whitesmoke;
+  font-size: 2.35rem;
+  font-weight: 700;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+#user-hand .carte-wrapper .card-cost {
+  position: absolute;
+  top: 58%;
+  left: 46.5%;
+  font-size: 2rem;
+  font-weight: 700;
+  color: whitesmoke;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+}
+#user-hand .carte-wrapper .card-hp {
+  position: absolute;
+  top: 3.5%;
+  left: 84.25%;
+  font-size: 2.35rem;
+  font-weight: 700;
+  color: whitesmoke;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
+}
+#user-hand .carte-wrapper .card-text-wrapper {
+  position: absolute;
+  top: 68%;
+  left: 14%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+#user-hand .carte-wrapper .card-text-wrapper .card-attributes {
+  font-weight: bold;
+}
+#user-hand .minion-image {
+  position: relative;
+  width: 85%;
+  left: 8%;
+  z-index: 1;
 }/*# sourceMappingURL=global.css.map */

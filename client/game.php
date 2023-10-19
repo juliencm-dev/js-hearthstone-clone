@@ -7,14 +7,13 @@
     require_once("partial/header.php");
 ?>
 
+<script src="js/classes/Card.js"></script>
 <script src="js/game.js"></script>
 
 <div id="game-wrapper">
     <div id="opponent">
         <div id="opponent-hand"></div>
-        <div id="opponent-hand-count"></div>
-        <div id="opponent-hero"></div>
-        
+        <div id="opponent-hero"></div>     
         <div id="opponent-mana"></div>
     </div>
 
@@ -35,7 +34,6 @@
     <div id="user">
         <div id="user-hand">
         </div>
-        <div id="user-hand-count"></div>
         <div id="user-hero"></div>
 
         <div id="mana-wrapper">
