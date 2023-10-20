@@ -484,7 +484,7 @@ body{
 
 #user-hand{
     position: absolute;
-    width: 90vw;
+    width: auto;
     height: 24.25vh;
 
     top: calc(100% - 24.75vh);
@@ -504,7 +504,7 @@ body{
     .carte-wrapper{
         position: relative;
         height: 100%;
-        width: calc(74vw/8 - 1rem);
+        width: calc(72vw/8 - 1rem);
         background-size: cover;
 
         z-index: 100;
@@ -521,11 +521,11 @@ body{
         .attack{
             position:absolute;
             top: 3.5%;
-            left: 7%;
+            left: 8%;
 
             color: whitesmoke;
 
-            font-size: 3vh;
+            font-size: 2.35rem;
             font-weight: 700;
             -webkit-text-stroke-width: 2px;
             -webkit-text-stroke-color: black;
@@ -534,9 +534,9 @@ body{
         .card-cost{
             position:absolute;
             top: 58%;
-            left: 48%;
+            left: 46.5%;
 
-            font-size: 2.5vh;
+            font-size: 2rem;
             font-weight: 700;
 
             color: whitesmoke;
@@ -548,9 +548,9 @@ body{
         .card-hp{
             position:absolute;
             top: 3.5%;
-            left: 87%;
+            left: 84.25%;
 
-            font-size: 3vh;
+            font-size: 2.35rem;
             font-weight: 700;
 
             color: whitesmoke;
@@ -564,8 +564,6 @@ body{
             top: 68%;
             left: 14%;
             width: 70%;
-            
-            font-size: 1.3vh;
 
             display: flex;
             flex-direction: column;

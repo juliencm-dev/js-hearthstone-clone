@@ -422,7 +422,7 @@ body {
 
 #user-hand {
   position: absolute;
-  width: 90vw;
+  width: auto;
   height: 24.25vh;
   top: calc(100% - 24.75vh);
   left: 50%;
@@ -438,7 +438,7 @@ body {
 #user-hand .carte-wrapper {
   position: relative;
   height: 100%;
-  width: calc(9.25vw - 1rem);
+  width: calc(9vw - 1rem);
   background-size: cover;
   z-index: 100;
   transition: all ease-in-out 400ms;
@@ -452,9 +452,9 @@ body {
 #user-hand .carte-wrapper .attack {
   position: absolute;
   top: 3.5%;
-  left: 7%;
+  left: 8%;
   color: whitesmoke;
-  font-size: 3vh;
+  font-size: 2.35rem;
   font-weight: 700;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
@@ -462,8 +462,8 @@ body {
 #user-hand .carte-wrapper .card-cost {
   position: absolute;
   top: 58%;
-  left: 48%;
-  font-size: 2.5vh;
+  left: 46.5%;
+  font-size: 2rem;
   font-weight: 700;
   color: whitesmoke;
   -webkit-text-stroke-width: 1.5px;
@@ -472,8 +472,8 @@ body {
 #user-hand .carte-wrapper .card-hp {
   position: absolute;
   top: 3.5%;
-  left: 87%;
-  font-size: 3vh;
+  left: 84.25%;
+  font-size: 2.35rem;
   font-weight: 700;
   color: whitesmoke;
   -webkit-text-stroke-width: 2px;
@@ -484,7 +484,6 @@ body {
   top: 68%;
   left: 14%;
   width: 70%;
-  font-size: 1.3vh;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
