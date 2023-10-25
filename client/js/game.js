@@ -1,4 +1,4 @@
-let timer, opponentMana, opponentHP, userMana, userHP, btnEndTurn, btnSurrender, oldHand = [];
+let timer, opponentMana, opponentHP, userMana, currentMana, userHP, btnEndTurn, btnSurrender, btnHeroPower, toBeRederend = true, oldHand = [], uidCardSelected;
 
 window.addEventListener("load", () => {
     timer = document.querySelector("#turn-timer");
@@ -6,10 +6,16 @@ window.addEventListener("load", () => {
     opponentHP = document.querySelector("#opponent-life");
     userMana = document.querySelector("#user-mana");
     userHP = document.querySelector("#user-life");
-    userHand = document.querySelector('#user-hand')
+    userHand = document.querySelector('#user-hand');
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#surrender").addEventListener("click", surrender);
+    document.querySelector("#hero-power").addEventListener("click", heroPower);
+    document.querySelector("#opponent-hero").addEventListener("click", () => {
+        attackCard(uidCardSelected, 0);
+        uidCardSelected = null;
+    })
+
     
     setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
 });
@@ -26,7 +32,10 @@ const state = () => {
 
         if (data != "LAST_GAME_LOST")
             setTimeout(state, 1000); // Attendre 1 seconde avant de relancer l’appel
-        })
+        else
+            window.location.href = "/lobby.php";
+        }     
+    )
 }
 
 const updateUI = (gameState) => {
@@ -42,13 +51,14 @@ const updateUI = (gameState) => {
         userHP.textContent = gameState.hp;
 
         userMana.innerHTML = "";
-        for (let i = 0 ; i < gameState.maxMp ; i++){
+        for (let i = 0 ; i < gameState.mp ; i++){
             currentTotalMana = document.createElement('div')
             currentTotalMana.classList.add('mana-count');
             userMana.append(currentTotalMana);
         }
         
         if(checkHandHasChanged(gameState.hand)){     
+            toBeRederended= false;
             userHand.innerHTML = "";
             for (let i = 0 ; i < gameState.hand.length ; i++){
                 let currentCard = gameState.hand[i];
@@ -58,14 +68,13 @@ const updateUI = (gameState) => {
                     uid: currentCard.uid,
                     atk: currentCard.atk,
                     cost: currentCard.cost,
-                    baseHP: currentCard.baseHP,
+                    baseHP: currentCard.hp,
                     mechanics: currentCard.mechanics
                 })
 
-                let newCardNode = newCard.buildCard()
-                console.log(newCard.cost);
+                let newCardNode = newCard.buildCard();
+
                 if(newCard.cost <= gameState.mp){
-                    console.log("working");
                     newCardNode.classList.add('is-useable');
                 }
 
@@ -78,6 +87,8 @@ const updateUI = (gameState) => {
 
             oldHand = gameState.hand.map(card => ({ ...card }));
         }
+
+        renderBattlefieldState(gameState);
     }
 }
 
@@ -101,6 +112,7 @@ const endTurn = () => {
     })
     .then(response => response.json())
     .then(data => {
+        toBeRederended = true;
         updateUI(data);
     })
 }
@@ -134,3 +146,86 @@ const playCard = (uid) => {
     })
 }
 
+const attackCard = (uid, targetuid) => {
+    formData = new FormData();
+    formData.append("type", "ATTACK");
+    formData.append("uid", uid);
+    formData.append("targetuid", targetuid);
+
+    fetch("ajax-game-action.php", {   
+            method : "POST", 
+            body: formData     
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        updateUI(data);
+    })
+}
+
+const heroPower = () => {
+    formData = new FormData();
+    formData.append("type", "HERO_POWER");
+
+    fetch("ajax-game-action.php", {   
+            method : "POST", 
+            body: formData     
+    })
+    .then(response => response.json())
+    .then(data => {
+        toBeRederended = true;
+        updateUI(data);
+    })
+}
+
+const renderBattlefieldState = (gameState) => {
+
+    const userField = document.querySelector('#user-field');
+    const opponentField = document.querySelector('#opponent-field');
+
+    userField.innerHTML = "";
+    opponentField.innerHTML = "";
+
+    for (let i = 0 ; i < gameState.board.length ; i++){
+        let currentCard = gameState.board[i];
+
+        let newCard = new Card({
+            id: currentCard.id,
+            uid: currentCard.uid,
+            atk: currentCard.atk,
+            cost: currentCard.cost,
+            baseHP: currentCard.hp,
+            mechanics: currentCard.mechanics
+        })
+
+        let newCardNode = newCard.buildCard()
+
+        newCardNode.addEventListener('click', () => {
+            uidCardSelected = currentCard.uid;
+        }) 
+
+        userField.append(newCardNode);
+    }
+
+    for (let i = 0 ; i < gameState.opponent.board.length ; i++){
+        let currentCard = gameState.opponent.board[i];
+
+        let newCard = new Card({
+            id: currentCard.id,
+            uid: currentCard.uid,
+            atk: currentCard.atk,
+            cost: currentCard.cost,
+            baseHP: currentCard.hp,
+            mechanics: currentCard.mechanics
+        })
+
+        let newCardNode = newCard.buildCard()
+
+        newCardNode.addEventListener('click', () => {
+            attackCard(uidCardSelected, currentCard.uid);
+            uidCardSelected = null;
+        })
+
+        opponentField.append(newCardNode);
+    }
+}

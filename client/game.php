@@ -37,6 +37,7 @@
         <div id="user-hero"></div>
 
         <div id="mana-wrapper">
+            <div id="mana"></div>
             <div id="user-mana">
                 <div class="mana-count"></div>
             </div>

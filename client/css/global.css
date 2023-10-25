@@ -310,16 +310,27 @@ body {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 25vh;
+  height: 10vh;
   background-color: #ffc972;
+}
+
+#opponent-hero {
+  width: 100px;
+  height: 100px;
+  background-color: #754124;
+}
+
+#mana {
+  font-size: 2rem;
+  color: blue;
 }
 
 #user {
   position: absolute;
-  top: 75vh;
+  top: 65vh;
   left: 0;
   width: 100vw;
-  height: 25vh;
+  height: 35vh;
   background-color: #ffc972;
 }
 #user #mana-wrapper {
@@ -349,10 +360,10 @@ body {
 
 #battlefield {
   position: relative;
-  top: 25vh;
+  top: 10vh;
   left: 0;
   width: 100vw;
-  height: 50vh;
+  height: 65vh;
   background-color: #8b5245;
 }
 #battlefield #stat-wrapper {
@@ -405,43 +416,38 @@ body {
   position: absolute;
   width: 60vw;
   height: 24.25vh;
-  top: 0.5vh;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #856f64;
-}
-#battlefield #user-field {
-  position: absolute;
-  width: 60vw;
-  height: 24.25vh;
-  top: calc(100% - 24.75vh);
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #856f64;
-}
-
-#user-hand {
-  position: absolute;
-  width: auto;
-  height: 24.25vh;
-  top: calc(100% - 24.75vh);
+  top: 1.5vh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  /*
-      Template de cartes:
-  */
 }
-#user-hand .carte-wrapper {
-  position: relative;
-  height: 100%;
-  width: calc(9vw - 1rem);
-  background-size: cover;
-  z-index: 100;
-  transition: all ease-in-out 400ms;
+#battlefield #user-field {
+  position: absolute;
+  width: 60vw;
+  height: 24.25vh;
+  top: calc(100% - 36.75vh);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#user-hand {
+  position: absolute;
+  width: auto;
+  height: 24.25vh;
+  top: calc(100% - 30vh);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 #user-hand .carte-wrapper:hover {
   scale: 1.2;
@@ -449,37 +455,50 @@ body {
   z-index: 1000;
   filter: drop-shadow(5px 5px 50px rgb(82, 201, 228));
 }
-#user-hand .carte-wrapper .attack {
+
+/*
+        Template de cartes:
+    */
+.carte-wrapper {
+  position: relative;
+  height: 100%;
+  width: calc(9.25vw - 1rem);
+  background-size: cover;
+  margin: 0 0.05rem;
+  z-index: 100;
+  transition: all ease-in-out 400ms;
+}
+.carte-wrapper .attack {
   position: absolute;
   top: 3.5%;
   left: 8%;
   color: whitesmoke;
-  font-size: 2.35rem;
+  font-size: 3.1vh;
   font-weight: 700;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
-#user-hand .carte-wrapper .card-cost {
+.carte-wrapper .card-cost {
   position: absolute;
-  top: 58%;
-  left: 46.5%;
-  font-size: 2rem;
+  top: 56.9%;
+  left: 47.5%;
+  font-size: 2.8vh;
   font-weight: 700;
   color: whitesmoke;
   -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: black;
 }
-#user-hand .carte-wrapper .card-hp {
+.carte-wrapper .card-hp {
   position: absolute;
   top: 3.5%;
-  left: 84.25%;
-  font-size: 2.35rem;
+  left: 85%;
+  font-size: 3.1vh;
   font-weight: 700;
   color: whitesmoke;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
-#user-hand .carte-wrapper .card-text-wrapper {
+.carte-wrapper .card-text-wrapper {
   position: absolute;
   top: 68%;
   left: 14%;
@@ -487,16 +506,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  font-size: 1.4vh;
 }
-#user-hand .carte-wrapper .card-text-wrapper .card-attributes {
+.carte-wrapper .card-text-wrapper .card-attributes {
   font-weight: bold;
 }
-#user-hand .is-useable {
+
+.is-useable {
   border: solid 4px rgb(172, 255, 47);
   border-radius: 15px;
   animation: opacity-pulse 2s linear infinite;
 }
-#user-hand .minion-image {
+
+.minion-image {
   position: relative;
   width: 85%;
   left: 8%;

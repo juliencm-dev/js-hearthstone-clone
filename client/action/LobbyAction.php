@@ -36,8 +36,14 @@
                 if(!empty($_POST["privateKey"])){
                     $data["privateKey"] = $_POST["gameMode"];
                 }
-
-                $data["type"] = $_POST["gameMode"];
+                
+                if ($_POST["gameMode"] != "ARENA"){
+                    $data["type"] = $_POST["gameMode"];
+                }
+                else{
+                    $data["type"] = "PVP";
+                    $data["mode"] = $_POST["gameMode"];
+                }
 
                 $result = parent::callAPI("games/auto-match", $data);
                 

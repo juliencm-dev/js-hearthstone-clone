@@ -7,6 +7,7 @@ class Card{
      
         this.cardFrame = "url(./img/card-assets/card-frame.png)";
         this.minionImage = `./img/card-assets/minion-img.png`;
+
         // this.minionImage = `./img/card-assets/minion-img-${this.id}.png`;
         
         this.cost = cost;
@@ -17,7 +18,7 @@ class Card{
 
     }
 
-    buildCard(){
+    buildCard(fieldType){
 
         const newCardNode = document.createElement('div');
         const newAtkNode = document.createElement('div');
