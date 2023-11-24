@@ -1,5 +1,7 @@
 'use strict'
 
+let swirlNode, swirlRotation = 0, swirlRotationSpeed = 0.15, swirlRotationMax = 360;
+
 window.addEventListener('load', () => {
     const buttons = document.querySelectorAll('.mode');
     const deckBuilder = document.querySelector("#deck-builder");
@@ -23,6 +25,8 @@ window.addEventListener('load', () => {
         document.querySelector(".overlay").classList.toggle("hidden");
     })
 
+    animate();
+
 });
 
 const applyStyles = iframe => {
@@ -30,6 +34,7 @@ const applyStyles = iframe => {
 		fontGoogleName : "Roboto",
 		fontSize : "16px",
 		hideIcons : false,
+        hideScrollBar : true,
 	}
 	
 	setTimeout(() => {
@@ -45,6 +50,23 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
     }
 });
+
+const animate = () => {
+
+    swirlNode = document.querySelector('.swirl');
+
+    if (swirlNode) {
+        swirlRotation += swirlRotationSpeed;
+        if (swirlRotation >= swirlRotationMax) {
+            swirlRotation = 0;
+        }
+        
+        swirlNode.style.transform = `rotate(${swirlRotation}deg)`;
+    }
+    
+    window.requestAnimationFrame(animate);
+
+}
 
 
 

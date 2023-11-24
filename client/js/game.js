@@ -1,24 +1,70 @@
-let timer, opponentMana, opponentHP, userMana, currentMana, userHP, btnEndTurn, btnSurrender, btnHeroPower, toBeRederend = true, oldHand = [], uidCardSelected;
+let overlay, timer, btnEndTurn, toBeRendered = true, gameLaunched = true, oldHand = [], uidCardSelected;
+let swirlNode, swirlRotation = 0, swirlRotationSpeed = 0.15, swirlRotationMax = 360;
+
+let userMana, userHP, currentMana, userNode, userHand, userField;
+let opponentNode, opponentMana, opponentHP;
 
 window.addEventListener("load", () => {
     timer = document.querySelector("#turn-timer");
     opponentMana = document.querySelector("#opponent-mana");
     opponentHP = document.querySelector("#opponent-life");
+    userNode = document.querySelector('#user');
+    opponentNode = document.querySelector('#opponent');
     userMana = document.querySelector("#user-mana");
     userHP = document.querySelector("#user-life");
     userHand = document.querySelector('#user-hand');
+    userField = document.querySelector('#user-field');
+    overlay = document.querySelector('.modal-overlay');
 
     document.querySelector("#end-turn").addEventListener("click", endTurn);
     document.querySelector("#surrender").addEventListener("click", surrender);
-    document.querySelector("#hero-power").addEventListener("click", heroPower);
-    document.querySelector("#opponent-hero").addEventListener("click", () => {
-        attackCard(uidCardSelected, 0);
-        uidCardSelected = null;
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape'){
+            overlay.classList.toggle('hidden');
+        }
+    });
+
+    overlay.addEventListener("click", () => {
+        overlay.classList.toggle('hidden');
     })
 
+    userField.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const cardUid = e.dataTransfer.getData('text/plain');
+        playCard(cardUid);
+    });
+      
+    userField.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        userField.classList.add('is-playable');
+    });
+
+    setTimeout(() => {
+        const waitingOverlay = document.querySelector('.loading');
+        waitingOverlay.style.display = 'none';
+    }, 3000);
     
     setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
+
+    animate();
 });
+
+const animate = () => {
+    swirlNode = document.querySelector('#halo');
+
+    if (swirlNode) {
+        swirlRotation += swirlRotationSpeed;
+        if (swirlRotation >= swirlRotationMax) {
+            swirlRotation = 0;
+        }
+        
+        swirlNode.style.transform = `translate(-50%, -50%) rotate(${swirlRotation}deg)`;
+    }
+
+    window.requestAnimationFrame(animate);
+}
+
 
 const state = () => {
     fetch("ajax-state.php", {   // Il faut créer cette page et son contrôleur appelle 
@@ -49,16 +95,36 @@ const updateUI = (gameState) => {
         opponentHP.textContent = gameState.opponent.hp;
         opponentMana.textContent = gameState.opponent.mp;
         userHP.textContent = gameState.hp;
+        userMana.textContent = gameState.mp;
 
-        userMana.innerHTML = "";
-        for (let i = 0 ; i < gameState.mp ; i++){
-            currentTotalMana = document.createElement('div')
-            currentTotalMana.classList.add('mana-count');
-            userMana.append(currentTotalMana);
+        if (gameLaunched){
+            let userHero = new Hero({heroClass: gameState.heroClass, playerType: "user"});
+            let opponentHero = new Hero({heroClass: gameState.opponent.heroClass, playerType: "opponent"});
+
+            let userHeroNode = userHero.buildHero();
+            let opponentHeroNode = opponentHero.buildHero();
+
+            userHeroNode.addEventListener('click', () => {
+                heroPower();
+            });
+
+            opponentHeroNode.addEventListener('drop', (e) => {
+                e.preventDefault();
+                const attackerUid = e.dataTransfer.getData('text/plain');
+                attackCard(attackerUid, 0);
+            });
+
+            opponentHeroNode.addEventListener('dragover', (e) => {
+                e.preventDefault();
+            });
+
+            userNode.append(userHeroNode);
+            opponentNode.append(opponentHeroNode);
+            gameLaunched = false;
         }
         
-        if(checkHandHasChanged(gameState.hand)){     
-            toBeRederended= false;
+        if(checkHandHasChanged(gameState.hand) || toBeRendered){     
+            toBeRendered= false;
             userHand.innerHTML = "";
             for (let i = 0 ; i < gameState.hand.length ; i++){
                 let currentCard = gameState.hand[i];
@@ -78,9 +144,13 @@ const updateUI = (gameState) => {
                     newCardNode.classList.add('is-useable');
                 }
 
-                newCardNode.addEventListener('click', () => {
-                    playCard(currentCard.uid);
-                })
+                newCardNode.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', currentCard.uid);
+                });
+
+                newCardNode.addEventListener('dragend', (e) => {
+                    userField.classList.remove('is-playable');
+                });
 
                 userHand.append(newCardNode);
             }
@@ -112,7 +182,7 @@ const endTurn = () => {
     })
     .then(response => response.json())
     .then(data => {
-        toBeRederended = true;
+        toBeRendered = true;
         updateUI(data);
     })
 }
@@ -173,7 +243,7 @@ const heroPower = () => {
     })
     .then(response => response.json())
     .then(data => {
-        toBeRederended = true;
+        toBeRendered = true;
         updateUI(data);
     })
 }
@@ -195,14 +265,15 @@ const renderBattlefieldState = (gameState) => {
             atk: currentCard.atk,
             cost: currentCard.cost,
             baseHP: currentCard.hp,
+            HP: currentCard.hp,
             mechanics: currentCard.mechanics
         })
 
         let newCardNode = newCard.buildCard()
 
-        newCardNode.addEventListener('click', () => {
-            uidCardSelected = currentCard.uid;
-        }) 
+        newCardNode.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', currentCard.uid);
+        }); 
 
         userField.append(newCardNode);
     }
@@ -221,10 +292,15 @@ const renderBattlefieldState = (gameState) => {
 
         let newCardNode = newCard.buildCard()
 
-        newCardNode.addEventListener('click', () => {
-            attackCard(uidCardSelected, currentCard.uid);
-            uidCardSelected = null;
-        })
+        newCardNode.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const attackerUid = e.dataTransfer.getData('text/plain');
+            attackCard(attackerUid, currentCard.uid);
+        });
+          
+        newCardNode.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
 
         opponentField.append(newCardNode);
     }

@@ -23,9 +23,12 @@
         <img src="./img/background/front-page/bg_0000_bg-7.png" class="parallax bg-5 greyscale" data-speedx="0.0120" data-speedy="0.002">
     </div>
 
-    <div class="lobby-bg"></div>
+    <img src="./img/vortex.png" class="swirl">
 
-    <div id="play-menu-wrapper">
+    <div class="lobby-bg"></div>
+    
+    <div class="menu-bg">
+        <div id="play-menu-wrapper">
             <form action="#" method="post" id="mode-wrapper">
                 <input type="hidden" name="gameMode" id="game-mode" value="">
                 <button class="btn mode" value="TRAINING">Pratique</button>
@@ -41,33 +44,35 @@
                 <button type="submit" class="btn quitter">Quitter</button>
             </form>
         </div>
+    </div>
+
     
-        <div id="lobby-wrapper">
-    
-            <?php 
-                if ($data["errorMessage"]) {
-                    ?>
-                        <div class="error-message" id="errorMessage"> <?= $data["errorMessage"]?></div>
-                    <?php
-                    $data["errorMessage"] = "";
-                }
-            ?>
-    
-            <div id="option-menu-wrapper">
-                <button class="btn">Statistiques</button>
-                <button id="deck-builder" class="btn">Deck Builder</button>
-            </div>
-    
+    <div id="utils-wrapper">
+        <div class="utils-menu-wrapper">
+            <button class="btn">Statistiques</button>
+            <button id="deck-builder" class="btn">Deck Builder</button>
             <form action="#" id="observer-wrapper" method="post">
-                    <button type="submit" class="btn mode" value="OBSERVER">Observer</button>
-                    <input type="text" name="username" class="input-field" placeholder="Nom du joueur">
+                <button type="submit" class="btn mode" value="OBSERVER">Observer</button>
+                <input type="text" name="username" class="input-field" placeholder="Nom du joueur">
             </form>
-      
-            <div id="chat-box" class="">
-                <iframe style="width:700px;height:240px;" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
-            </div>
-    
         </div>
+    </div>
+    
+    
+    <div id="lobby-wrapper">
+        <?php 
+            if ($data["errorMessage"]) {
+                ?>
+                    <div class="error-message" id="errorMessage"> <?= $data["errorMessage"]?></div>
+                <?php
+                $data["errorMessage"] = "";
+            }
+        ?>
+    </div>
+
+    <div id="chat-box" class="">
+        <iframe frameBorder="0" class="chat" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
+    </div>
 
 
 <?php

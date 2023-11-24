@@ -8,13 +8,28 @@
 ?>
 
 <script src="js/classes/Card.js"></script>
+<script src="js/classes/Hero.js"></script>
 <script src="js/game.js"></script>
 
+<div class="game-bg"></div>
+
+<div class="loading">
+    <div class="loading-txt">
+        La partie commencera dans quelques instants...
+    </div>
+</div>
+
+<div class="modal-overlay hidden">
+    <img class="modal-box" src="./img/lobby-ui-chat.png" alt="">
+    <button id="surrender" class="btn">Surrender</button>
+</div>
+
+<img src="./img/ui/halo.png" alt="" id="halo">
+
 <div id="game-wrapper">
-    <div id="opponent">
-        <div id="opponent-hand"></div>
-        <div id="opponent-hero"></div>     
+    <div id="opponent">  
         <div id="opponent-mana"></div>
+        <div id="opponent-life">30</div>
     </div>
 
     <div id="battlefield">
@@ -22,29 +37,17 @@
         <div id="user-field"></div>
         
         <div id="stat-wrapper">
-            <div id="opponent-life">30</div>
-                <div id="turn-state-wrapper">
-                    <button id="end-turn">End Turn</button>
-                    <div id="turn-timer">50</div>
-                </div>
-            <div id="user-life">30</div>
+            <div id="turn-state-wrapper">
+                <button id="end-turn">End Turn</button>
+                <div id="turn-timer">50</div>
+            </div>
         </div>
     </div>
 
     <div id="user">
-        <div id="user-hand">
-        </div>
-        <div id="user-hero"></div>
-
-        <div id="mana-wrapper">
-            <div id="mana"></div>
-            <div id="user-mana">
-                <div class="mana-count"></div>
-            </div>
-        </div>
-
-        <button id="hero-power">Hero Power</button>
-        <button id="surrender">Surrender</button>
+        <div id="user-hand"></div>
+        <div id="user-life">30</div>
+        <div id="user-mana">0</div>
     </div>
 </div>
 

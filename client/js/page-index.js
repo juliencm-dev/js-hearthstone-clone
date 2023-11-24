@@ -43,20 +43,7 @@ const animate = () => {
             sparks.push(new Spark);
         }
     }
-
-    // if (counterSmoke === timingSmoke){       
-    //     let nodeSmokes = document.querySelectorAll('.smoke');     
-    //     nodeSmokes.forEach((smoke) => {
-    //         let offsetLeft = smoke.offsetLeft;
-    //         let newOffset = offsetLeft + smokeVelX;
-    //         smoke.style.left = newOffset + "px";
-
-    //     })
-    //     counterSmoke = 0;
-    // }else {
-    //     counterSmoke++;
-    // }
-
+    
     sparks.forEach(spark => {
         spark.draw();
 

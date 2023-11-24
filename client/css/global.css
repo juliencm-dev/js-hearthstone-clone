@@ -121,6 +121,24 @@ body {
   animation: pulse 4s ease-in-out infinite;
 }
 
+.btn {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: "akhand-sinhala", sans-serif;
+  height: 6.68vh;
+  width: 24vh;
+  padding-top: 0.3rem;
+  color: #fef9dd; /* Make text transparent */
+  border: none;
+  background: url(../img/btn.png) center center no-repeat; /* Replace 'your-image.png' with the path to your PNG image */
+  background-size: cover; /* Adjust background size as needed */
+  transition: background-color 0.17s ease, color 0.17s ease;
+  filter: drop-shadow(2px 2px 10px black);
+}
+
 .login-box {
   display: flex;
   flex-direction: column;
@@ -134,31 +152,10 @@ body {
   height: 40rem;
   filter: drop-shadow(10px 10px 10px black);
 }
-
-.btn {
-  display: inline-block;
-  outline: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.2rem 2.5rem;
-  height: 2.3rem;
-  color: #fef9dd;
-  border: solid #2f1b10 0.5px;
-  background-color: #754124;
-  transition: background-color 0.17s ease, color 0.17s ease;
-  box-shadow: rgba(6, 6, 6, 0.575) 0px 2px 8px 0px;
-}
-.btn:hover {
-  background-color: #3d2315;
-}
-
-.quitter {
-  background-color: rgb(242, 88, 88);
-}
-.quitter:hover {
-  background-color: rgb(202, 71, 71);
+.login-box .btn {
+  height: 5vh;
+  width: 17.96vh;
+  font-size: 1.2rem;
 }
 
 .input-field {
@@ -226,6 +223,16 @@ body {
   z-index: 800;
 }
 
+.swirl {
+  position: absolute;
+  top: -40vh;
+  left: 0;
+  width: 98vw;
+  height: 98vw;
+  opacity: 0.7;
+  z-index: 5;
+}
+
 #deck-builder-frame {
   background-color: rgb(72, 49, 42);
   position: absolute;
@@ -234,11 +241,27 @@ body {
   z-index: 1000;
 }
 
+.menu-bg {
+  position: absolute;
+  top: 50.5vh;
+  left: 19vw;
+  height: 90vh;
+  width: 49.33vh;
+  background-image: url(../img/lobby-ui.png);
+  background-size: cover;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  filter: drop-shadow(2px 2px 10px black);
+}
+
 #play-menu-wrapper {
   position: absolute;
-  top: 50%;
-  left: 25%;
-  transform: translate(-60%, -50%);
+  top: 15%;
+  left: 11.7vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25vh;
   z-index: 15;
 }
 
@@ -246,12 +269,16 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  height: 107vh;
 }
 
 #pvp-wrapper {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+#pvp-wrapper .input-field {
+  width: 24.2vh;
 }
 
 #lobby-wrapper {
@@ -265,15 +292,55 @@ body {
   align-items: center;
 }
 
-#observer-wrapper {
+#utils-wrapper {
+  position: absolute;
+  top: 34.5vh;
+  left: 69.5vw;
+  background-image: url(../img/lobby-ui-short.png);
+  background-size: cover;
+  height: 59vh;
+  width: 49.33vh;
+  filter: drop-shadow(2px 2px 10px black);
+  z-index: 10;
+}
+#utils-wrapper .utils-menu-wrapper {
+  position: absolute;
+  top: 12vh;
+  left: 12vh;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 2rem;
+  z-index: 15;
+}
+#utils-wrapper #option-menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+#utils-wrapper #observer-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-#option-menu-wrapper {
-  display: flex;
-  gap: 1rem;
+#chat-box {
+  position: absolute;
+  top: 58vh;
+  left: 31vw;
+  width: 69.32vh;
+  height: 38vh;
+  background-image: url(../img/lobby-ui-chat.png);
+  background-size: cover;
+  z-index: 10;
+  filter: drop-shadow(2px 2px 10px black);
+}
+#chat-box .chat {
+  position: absolute;
+  top: 22%;
+  left: 10%;
+  width: 80%;
+  height: 50%;
+  padding: 0.5rem;
 }
 
 .error-message {
@@ -288,13 +355,82 @@ body {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.hidden {
-  display: none;
+/* 
+    loading
+*/
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #040301;
+  z-index: 1000;
+  animation: fadeOut 5s ease-out forwards;
+  animation-delay: 7s;
+}
+.loading .loading-txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fef9dd;
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 /* 
     game.php
 */
+#halo {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg);
+  width: 65vh;
+  height: 65vh;
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  transition: all ease-in-out 400ms;
+}
+.modal-overlay .modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30vw;
+  height: auto;
+  z-index: 200;
+}
+.modal-overlay #surrender {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 250;
+}
+
+.game-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(../img/ui/game-board.png);
+  background-size: cover;
+  background-position: center;
+}
+
 #game-wrapper {
   position: absolute;
   top: 50%;
@@ -302,7 +438,6 @@ body {
   transform: translate(-50%, -50%);
   width: 100vw;
   height: 100vh;
-  background-color: #de8900;
 }
 
 #opponent {
@@ -311,13 +446,20 @@ body {
   left: 0;
   width: 100vw;
   height: 10vh;
-  background-color: #ffc972;
 }
 
 #opponent-hero {
-  width: 100px;
-  height: 100px;
-  background-color: #754124;
+  position: absolute;
+  top: 0;
+  left: calc(100vw - 25vh);
+  width: 25vh;
+  height: 25vh;
+  z-index: 15;
+  filter: drop-shadow(2px 2px 10px black);
+  transition: all ease-in-out 400ms;
+}
+#opponent-hero:hover {
+  filter: drop-shadow(0 0 15px rgb(188, 100, 6));
 }
 
 #mana {
@@ -331,7 +473,6 @@ body {
   left: 0;
   width: 100vw;
   height: 35vh;
-  background-color: #ffc972;
 }
 #user #mana-wrapper {
   position: absolute;
@@ -347,15 +488,15 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  padding-left: 0.5rem;
+  padding-left: 0.2rem;
 }
 #user #mana-wrapper .mana-count {
-  background-color: rgba(15, 139, 255, 0.7725490196);
-  height: 2.5vh;
-  width: 2.5vh;
-  border-radius: 50%;
-  border: 1px solid rgba(18, 42, 65, 0.7725490196);
+  background-image: url(../img/ui/mana-crystal.png);
+  background-size: cover;
+  background-position: center;
+  height: 4vh;
+  width: 4vh;
+  filter: drop-shadow(1px 1px 3px black);
 }
 
 #battlefield {
@@ -364,7 +505,6 @@ body {
   left: 0;
   width: 100vw;
   height: 65vh;
-  background-color: #8b5245;
 }
 #battlefield #stat-wrapper {
   position: absolute;
@@ -374,18 +514,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5rem;
-}
-#battlefield #stat-wrapper #opponent-life, #battlefield #stat-wrapper #user-life {
-  text-align: center;
-  line-height: 8.5vh;
-  padding: 0;
-  margin: 0;
-  background-color: rgba(167, 26, 8, 0.3843137255);
-  height: 8vh;
-  width: 8vh;
-  border-radius: 50%;
-  font-size: 2rem;
-  margin-left: 2vw;
 }
 #battlefield #turn-state-wrapper {
   display: flex;
@@ -414,7 +542,7 @@ body {
 }
 #battlefield #opponent-field {
   position: absolute;
-  width: 60vw;
+  width: 80vw;
   height: 24.25vh;
   top: 1.5vh;
   left: 50%;
@@ -426,7 +554,7 @@ body {
 }
 #battlefield #user-field {
   position: absolute;
-  width: 60vw;
+  width: 80vw;
   height: 24.25vh;
   top: calc(100% - 36.75vh);
   left: 50%;
@@ -437,13 +565,28 @@ body {
   justify-content: center;
 }
 
+#user-hero {
+  position: absolute;
+  top: calc(100% - 30vh);
+  left: 0;
+  width: 30vh;
+  height: 30vh;
+  z-index: 15;
+  filter: drop-shadow(2px 2px 10px black);
+  transition: all ease-in-out 400ms;
+}
+#user-hero:hover {
+  transform: scale(1.02);
+  filter: drop-shadow(0 0 15px rgb(188, 100, 6));
+}
+
 #user-hand {
   position: absolute;
   width: auto;
   height: 24.25vh;
   top: calc(100% - 30vh);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) scale(0.8);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -453,20 +596,91 @@ body {
   scale: 1.2;
   transform: translateY(-50px);
   z-index: 1000;
-  filter: drop-shadow(5px 5px 50px rgb(82, 201, 228));
+  filter: drop-shadow(5px 5px 50px rgb(188, 100, 6));
+}
+
+#opponent-life {
+  position: absolute;
+  top: 15vh;
+  left: calc(100vw - 26vh);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 8vh;
+  width: 8vh;
+  border-radius: 50%;
+  font-size: 3rem;
+  margin-left: 2vw;
+  color: #ededed;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  filter: drop-shadow(1px 1px 5px black);
+  background-image: url(../img/ui/health-crystal.png);
+  background-size: cover;
+  background-position: center;
+  z-index: 300;
+}
+
+#user-life {
+  position: absolute;
+  top: calc(100% - 12vh);
+  left: -2vh;
+  text-align: center;
+  line-height: 10.5vh;
+  padding: 0;
+  margin: 0;
+  background-image: url(../img/ui/health-crystal.png);
+  background-size: cover;
+  background-position: center;
+  height: 10vh;
+  width: 10vh;
+  border-radius: 50%;
+  font-size: 3rem;
+  margin-left: 2vw;
+  color: #ededed;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  filter: drop-shadow(1px 1px 5px black);
+  z-index: 300;
+}
+
+#user-mana {
+  position: absolute;
+  top: calc(100% - 12.7vh);
+  left: 14vh;
+  text-align: center;
+  line-height: 11vh;
+  padding: 0;
+  margin: 0;
+  background-image: url(../img/ui/mana-crystal.png);
+  background-size: cover;
+  background-position: center;
+  height: 10.5vh;
+  width: 10.5vh;
+  border-radius: 50%;
+  font-size: 3rem;
+  margin-left: 2.1vw;
+  color: #ededed;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: black;
+  filter: drop-shadow(1px 1px 5px black);
+  z-index: 300;
 }
 
 /*
-        Template de cartes:
-    */
+    Template de cartes:
+*/
 .carte-wrapper {
   position: relative;
-  height: 100%;
-  width: calc(9.25vw - 1rem);
-  background-size: cover;
+  height: 24.25vh;
+  width: 16.6vh;
+  background-color: rgba(37, 37, 2, 0.961);
+  border-radius: 2rem;
   margin: 0 0.05rem;
-  z-index: 100;
+  z-index: 15;
   transition: all ease-in-out 400ms;
+  filter: drop-shadow(2px 2px 10px black);
 }
 .carte-wrapper .attack {
   position: absolute;
@@ -477,6 +691,23 @@ body {
   font-weight: 700;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
+  z-index: 15;
+}
+.carte-wrapper .carte-frame {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+.carte-wrapper .minion-image {
+  position: relative;
+  width: 100%;
+  left: 0;
+  z-index: 5;
 }
 .carte-wrapper .card-cost {
   position: absolute;
@@ -487,6 +718,7 @@ body {
   color: whitesmoke;
   -webkit-text-stroke-width: 1.5px;
   -webkit-text-stroke-color: black;
+  z-index: 15;
 }
 .carte-wrapper .card-hp {
   position: absolute;
@@ -497,6 +729,7 @@ body {
   color: whitesmoke;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
+  z-index: 15;
 }
 .carte-wrapper .card-text-wrapper {
   position: absolute;
@@ -506,23 +739,16 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  font-size: 1.4vh;
+  font-size: 1.3vh;
+  z-index: 15;
 }
 .carte-wrapper .card-text-wrapper .card-attributes {
   font-weight: bold;
 }
 
 .is-useable {
-  border: solid 4px rgb(172, 255, 47);
+  border: solid 3px rgb(151, 47, 255);
   border-radius: 15px;
-  animation: opacity-pulse 2s linear infinite;
-}
-
-.minion-image {
-  position: relative;
-  width: 85%;
-  left: 8%;
-  z-index: 1;
 }
 
 /*
@@ -558,4 +784,15 @@ body {
   75% {
     transform: scale(1.01);
   }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.hidden {
+  display: none;
 }/*# sourceMappingURL=global.css.map */
