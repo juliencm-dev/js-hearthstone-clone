@@ -422,7 +422,7 @@ body{
     z-index: 1000;
 
     animation: fadeOut 3s ease-out forwards;
-    animation-delay: 6s;
+    animation-delay: 5s;
 
     .loading-txt{
         position: absolute;
@@ -972,6 +972,31 @@ body{
         opacity: 0;
     }
   
+}
+
+.fade-in {
+    animation: fadeIn ease 200ms;
+    -webkit-animation: fadeIn ease 200ms;
+    -moz-animation: fadeIn ease 200ms;
+    -o-animation: fadeIn ease 200ms;
+    -ms-animation: fadeIn ease 200ms;
+}
+
+.fade-out {
+    animation: fadeOut ease 200ms;
+    -webkit-animation: fadeOut ease 200ms;
+    -moz-animation: fadeOut ease 200ms;
+    -o-animation: fadeOut ease 200ms;
+    -ms-animation: fadeOut ease 200ms;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .is-turn{

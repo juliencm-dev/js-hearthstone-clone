@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         const waitingOverlay = document.querySelector('.loading');
         waitingOverlay.style.display = 'none';
-    }, 9000);
+    }, 8000);
     
     setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
 

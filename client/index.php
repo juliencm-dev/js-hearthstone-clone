@@ -26,7 +26,7 @@
 </div>
 
 
-<div class="login-wrapper hidden">
+<div class="login-wrapper fade-in hidden">
     <form class="login-box" action="#" method="POST">
       <?php 
           if ($data["hasConnectionError"]) {

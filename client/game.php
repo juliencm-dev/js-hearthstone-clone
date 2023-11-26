@@ -19,7 +19,7 @@
     </div>
 </div>
 
-<div class="modal-overlay hidden">
+<div class="modal-overlay fade-in hidden">
     <img class="modal-box" src="./img/lobby-ui-chat.png" alt="">
     <button id="surrender" class="btn">Surrender</button>
 </div>
