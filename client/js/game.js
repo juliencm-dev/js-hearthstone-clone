@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         const waitingOverlay = document.querySelector('.loading');
         waitingOverlay.style.display = 'none';
-    }, 3000);
+    }, 9000);
     
     setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
 
@@ -97,6 +97,7 @@ const updateUI = (gameState) => {
         userHP.textContent = gameState.hp;
         userMana.textContent = gameState.mp;
 
+
         if (gameLaunched){
             let userHero = new Hero({heroClass: gameState.heroClass, playerType: "user"});
             let opponentHero = new Hero({heroClass: gameState.opponent.heroClass, playerType: "opponent"});
@@ -121,6 +122,14 @@ const updateUI = (gameState) => {
             userNode.append(userHeroNode);
             opponentNode.append(opponentHeroNode);
             gameLaunched = false;
+        }
+
+        if (gameState.yourTurn){
+            document.querySelector("#user-hero").classList.add('is-turn');
+            document.querySelector("#opponent-hero").classList.remove('is-turn');
+        }else{
+            document.querySelector("#user-hero").classList.remove('is-turn');
+            document.querySelector("#opponent-hero").classList.add('is-turn');
         }
         
         if(checkHandHasChanged(gameState.hand) || toBeRendered){     
