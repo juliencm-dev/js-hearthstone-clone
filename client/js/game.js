@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
     setTimeout(() => {
         const waitingOverlay = document.querySelector('.loading');
         waitingOverlay.style.display = 'none';
-    }, 8000);
+    }, 6000);
     
     setTimeout(state, 1000); // Appel initial (attendre 1 seconde)
 
@@ -182,7 +182,7 @@ const checkHandHasChanged = (newHand) => {
 }
 
 const endTurn = () => {
-    formData = new FormData();
+    let formData = new FormData();
     formData.append("type", "END_TURN");
 
     fetch("ajax-game-action.php", {   
@@ -197,7 +197,7 @@ const endTurn = () => {
 }
 
 const surrender = () => {
-    formData = new FormData();
+    let formData = new FormData();
     formData.append("type", "SURRENDER");
 
     fetch("ajax-game-action.php", {   
@@ -211,7 +211,7 @@ const surrender = () => {
 }
 
 const playCard = (uid) => {
-    formData = new FormData();
+    let formData = new FormData();
     formData.append("type", "PLAY");
     formData.append("uid", uid);
 
@@ -226,7 +226,7 @@ const playCard = (uid) => {
 }
 
 const attackCard = (uid, targetuid) => {
-    formData = new FormData();
+    let formData = new FormData();
     formData.append("type", "ATTACK");
     formData.append("uid", uid);
     formData.append("targetuid", targetuid);
@@ -243,7 +243,7 @@ const attackCard = (uid, targetuid) => {
 }
 
 const heroPower = () => {
-    formData = new FormData();
+    let formData = new FormData();
     formData.append("type", "HERO_POWER");
 
     fetch("ajax-game-action.php", {   

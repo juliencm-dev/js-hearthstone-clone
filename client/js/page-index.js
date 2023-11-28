@@ -11,9 +11,11 @@ if(timingSparks <= 0){
 window.addEventListener("load", () => {
 
 
-    window.addEventListener('keydown', () => {
-        document.querySelector('.logo').classList.add('hidden');
-        document.querySelector('.login-wrapper').classList.remove('hidden');
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter'){
+            document.querySelector('.logo').classList.add('hidden');
+            document.querySelector('.login-wrapper').classList.remove('hidden');
+        }
     });
 
     let posX = 0, posY = 0

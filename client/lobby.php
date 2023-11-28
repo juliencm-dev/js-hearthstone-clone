@@ -8,11 +8,13 @@
 ?>
     
     <script src="js/page-lobby.js"></script>
+
     <div class="overlay hidden">
         <div id="deck-builder-frame" class="hidden">
                 <iframe id="deck" style="height:90vh; width:90vw; " src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
         </div>
     </div>
+    
     <div class="bg-image">
         <img src="./img/background/front-page/bg_0006_bg-1.png" class="parallax bg-1 greyscale" data-speedx="0.05" data-speedy="0.02" >
         <img src="./img/background/front-page/bg_0005_bg-2.png" class="parallax bg-2 greyscale" data-speedx="0.03" data-speedy="0.015">
@@ -24,7 +26,6 @@
     </div>
 
     <img src="./img/vortex.png" class="swirl">
-
     <div class="lobby-bg"></div>
     
     <div class="menu-bg">

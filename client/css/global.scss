@@ -27,6 +27,15 @@ body{
     z-index: 10;
 }
 
+.logo-text{
+    text-align: center;
+    font-style: italic;
+    font-size: 2rem;
+    color: #fef9dd;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+
 .login-wrapper{
 
     &::before{
@@ -159,8 +168,10 @@ body{
     background-size: cover;
     background-position: center;
 
-    width: 45rem;
-    height: 40rem;
+    width: 65vh;
+    height: 60vh;
+
+    padding-top: 1vh;
 
     filter: drop-shadow(10px 10px 10px black);
 
@@ -421,7 +432,7 @@ body{
 
     z-index: 1000;
 
-    animation: fadeOut 3s ease-out forwards;
+    animation: fadeOut 2s ease-out forwards;
     animation-delay: 5s;
 
     .loading-txt{

@@ -23,6 +23,7 @@
 
 <div class="logo">
   <img src="./img/magix-logo.png" id="logo-magix">
+  <div class="logo-text">Press enter to start</div>
 </div>
 
 
