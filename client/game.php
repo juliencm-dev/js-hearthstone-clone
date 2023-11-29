@@ -38,7 +38,7 @@
         
         <div id="stat-wrapper">
             <div id="turn-state-wrapper">
-                <button id="end-turn">End Turn</button>
+                <button id="end-turn" class="btn">End Turn</button>
                 <div id="turn-timer">50</div>
             </div>
         </div>

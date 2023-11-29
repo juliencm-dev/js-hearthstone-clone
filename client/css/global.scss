@@ -634,7 +634,29 @@ body{
         gap: 1rem;
 
         #turn-timer{
+            position: absolute;
+            top:3vh;
+            left: 18.3vw;
+
+            text-align: center;
+            line-height: 10.5vh;
+
+            padding: 0;
+            margin: 0;
+
+            background-image: url(../img/timer.png);
+            background-size: cover;
+            background-position: center;
+
+            height: 10vh;
+            width: 10vh;
             font-size: 3rem;
+
+            color: #ededed;
+            -webkit-text-stroke-width: 1.5px;
+            -webkit-text-stroke-color: black;
+        
+            filter: drop-shadow(1px 1px 5px black);
         }
 
         #end-turn{
@@ -646,14 +668,8 @@ body{
             padding: 0.2rem 1rem;
             height: 2.3rem;
             color: #fef9dd;
-            border:solid #2f1b10 0.5px;
-            background-color: #754124;
             transition: background-color .17s ease,color .17s ease;
             box-shadow: rgba(6, 6, 6, 0.575) 0px 2px 8px 0px;
-            
-            &:hover{
-                background-color: #3d2315;
-            }
 
         }
     }
