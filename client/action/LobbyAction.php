@@ -9,53 +9,9 @@
 
         protected function executeAction() {
             $key = $_SESSION["key"];
-            $errorMessage = "";
-            $data = [];
+
             $data["key"] = $key;
 
-            if(!empty($_POST["username"])){
-                $_SESSION["observer"] = $_POST["username"];
-                $data["username"] = $_SESSION["observer"];
-                
-                $result = parent::callAPI("games/observe", $data);
-                
-                if ($result == "WAITING") {
-                    $errorMessage = "En attente d’un autre joueur";
-                }
-                elseif($result == "NOT_IN_GAME"){
-                    $errorMessage = "Le joueur n’est pas dans une partie";
-                }
-                else {
-                    header("location:game.php");
-                    exit;
-                }
-            }
-
-            if(!empty($_POST["gameMode"])){
-
-                if(!empty($_POST["privateKey"])){
-                    $data["privateKey"] = $_POST["gameMode"];
-                }
-                
-                if ($_POST["gameMode"] != "ARENA"){
-                    $data["type"] = $_POST["gameMode"];
-                }
-                else{
-                    $data["type"] = "PVP";
-                    $data["mode"] = $_POST["gameMode"];
-                }
-
-                $result = parent::callAPI("games/auto-match", $data);
-                
-                if ($result == "DECK_INCOMPLETE") {
-                    $errorMessage = "Votre Deck n'est pas complet!";
-                }
-                else {
-                    header("location:game.php");
-                    exit;
-                }
-
-            }
-            return compact("key", "errorMessage");
+            return compact("key");
     }
 }

@@ -1,3 +1,20 @@
+@charset "UTF-8";
+/*
+    Fichier: global.scss
+
+    Ce fichier contient les styles globaux pour l'application web.
+    Il définit les styles pour le corps de la page, les éléments de connexion, les boutons, les champs de saisie, etc.
+    Les styles sont organisés en classes et utilisent des sélecteurs imbriqués pour la hiérarchie des styles.
+    Les commentaires sont utilisés pour décrire chaque section de styles et fournir des informations supplémentaires.
+
+    Utilisation du préprocesseur SCSS pour la compilation en CSS et la facilité de développement.
+
+    Auteur: Julien Coulombe-Morency
+    Date: 2021-04-12
+    Version: 1.0
+    Contexte: Projet Magix - Programmation Web 3
+
+*/
 html {
   font-family: "akhand-sinhala", sans-serif;
 }
@@ -18,8 +35,7 @@ body {
   z-index: 2;
 }
 
-.login-wrapper,
-.logo {
+.login-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -27,12 +43,18 @@ body {
   z-index: 10;
 }
 
-.logo-text {
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
   font-style: italic;
   font-size: 2rem;
   color: #fef9dd;
-  animation: pulse 4s ease-in-out infinite;
+}
+.logo #logo-magix {
+  filter: drop-shadow(30px 30px 60px black);
 }
 
 .login-wrapper::before {
@@ -49,50 +71,6 @@ body {
   animation: flicker 3s linear reverse infinite;
 }
 
-@keyframes flicker {
-  0% {
-    opacity: 0.4;
-  }
-  5% {
-    opacity: 0.5;
-  }
-  10% {
-    opacity: 0.6;
-  }
-  15% {
-    opacity: 0.85;
-  }
-  25% {
-    opacity: 0.5;
-  }
-  30% {
-    opacity: 1;
-  }
-  35% {
-    opacity: 0.1;
-  }
-  40% {
-    opacity: 0.25;
-  }
-  45% {
-    opacity: 0.5;
-  }
-  60% {
-    opacity: 1;
-  }
-  70% {
-    opacity: 0.85;
-  }
-  80% {
-    opacity: 0.4;
-  }
-  90% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .bg-image {
   position: relative;
   width: 100vw;
@@ -122,11 +100,6 @@ body {
 
 .bg-5 {
   z-index: 10;
-}
-
-#logo-magix {
-  filter: drop-shadow(30px 30px 60px black);
-  animation: pulse 4s ease-in-out infinite;
 }
 
 .btn {
@@ -165,6 +138,15 @@ body {
   height: 5vh;
   width: 17.96vh;
   font-size: 1.2rem;
+}
+.login-box .error {
+  position: relative;
+  top: -15px;
+  color: #d74120;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-style: italic;
 }
 
 .input-field {
@@ -217,11 +199,6 @@ body {
   z-index: 10;
 }
 
-.greyscale {
-  filter: grayscale(60%);
-  width: 2500px;
-}
-
 .overlay {
   position: absolute;
   top: 0;
@@ -239,7 +216,7 @@ body {
   width: 98vw;
   height: 98vw;
   opacity: 0.7;
-  z-index: 5;
+  z-index: 10;
 }
 
 #deck-builder-frame {
@@ -250,20 +227,21 @@ body {
   z-index: 1000;
 }
 
-.menu-bg {
+#play-menu-bg {
   position: absolute;
-  top: 50.5vh;
-  left: 19vw;
+  top: 5.6vh;
+  left: 5vw;
   height: 90vh;
   width: 49.33vh;
   background-image: url(../img/lobby-ui.png);
   background-size: cover;
-  transform: translate(-50%, -50%);
+  transform-origin: left;
+  transform: scaleY(1);
+  transition: transform 500ms ease-in-out;
   z-index: 10;
   filter: drop-shadow(2px 2px 10px black);
 }
-
-#play-menu-wrapper {
+#play-menu-bg .play-menu-wrapper {
   position: absolute;
   top: 15%;
   left: 11.7vh;
@@ -274,20 +252,11 @@ body {
   z-index: 15;
 }
 
-#mode-wrapper, #logout-wrapper, #play-menu-wrapper {
+.mode-wrapper, .logout-wrapper, .play-menu-wrapper {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   height: 107vh;
-}
-
-#pvp-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-#pvp-wrapper .input-field {
-  width: 24.2vh;
 }
 
 #lobby-wrapper {
@@ -301,18 +270,21 @@ body {
   align-items: center;
 }
 
-#utils-wrapper {
+#utils-menu-bg {
   position: absolute;
   top: 34.5vh;
   left: 69.5vw;
   background-image: url(../img/lobby-ui-short.png);
   background-size: cover;
+  transform-origin: right;
+  transform: scaleY(1);
+  transition: transform 500ms ease-in-out;
   height: 59vh;
   width: 49.33vh;
   filter: drop-shadow(2px 2px 10px black);
   z-index: 10;
 }
-#utils-wrapper .utils-menu-wrapper {
+#utils-menu-bg .utils-menu-wrapper {
   position: absolute;
   top: 12vh;
   left: 12vh;
@@ -321,15 +293,17 @@ body {
   gap: 2rem;
   z-index: 15;
 }
-#utils-wrapper #option-menu-wrapper {
+#utils-menu-bg .observer-wrapper {
+  margin-top: 4vw;
+  margin-left: -0.4vw;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-#utils-wrapper #observer-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  background-color: rgba(4, 3, 1, 0.4039215686);
+  padding: 1vw 0.5vw;
+  border-radius: 0.5vw;
+  align-items: center;
+  justify-content: center;
 }
 
 #chat-box {
@@ -338,6 +312,9 @@ body {
   left: 31vw;
   width: 69.32vh;
   height: 38vh;
+  transform-origin: bottom;
+  transform: scaleY(0);
+  transition: transform 500ms ease-in-out;
   background-image: url(../img/lobby-ui-chat.png);
   background-size: cover;
   z-index: 10;
@@ -345,23 +322,93 @@ body {
 }
 #chat-box .chat {
   position: absolute;
-  top: 18%;
-  left: 12%;
-  width: 570px;
-  height: 380px;
+  top: 5vw;
+  left: 4.3vw;
+  width: 30vw;
+  height: 20vh;
+  transform-origin: bottom;
   padding: 0.5rem;
 }
 
-.error-message {
-  color: white;
-  width: 20rem;
-  height: 3rem;
-  background-color: rgb(175, 64, 64);
+#game-mode-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  transition: all 500ms ease-in-out;
+  width: 82vh;
+  height: 45vh;
+  background-image: url(../img/lobby-ui-chat.png);
+  background-size: cover;
+  z-index: 350;
+  filter: drop-shadow(2px 2px 10px black);
+}
+#game-mode-bg .mode-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 82vh;
+  height: 45vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 2vw;
   align-items: center;
-  border-radius: 5px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  justify-content: center;
+  color: #fef9dd;
+  font-size: 3rem;
+  font-weight: 600;
+  z-index: 350;
+}
+#game-mode-bg .btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 3.5vw;
+}
+#game-mode-bg #private {
+  padding: 1rem 3rem;
+  background-color: rgba(4, 3, 1, 0.3254901961);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  align-items: center;
+  justify-content: center;
+}
+
+#error-message {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #d74120;
+  font-size: 3rem;
+  font-weight: 700;
+  font-style: italic;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.541);
+  z-index: 1000;
+}
+
+#error-message-game {
+  position: absolute;
+  top: 67%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  color: #ededed;
+  background-color: rgba(4, 3, 1, 0.6431372549);
+  padding: 0.5vw 3vw;
+  border-radius: 1vw;
+  font-size: 4rem;
+  font-weight: 700;
+  font-style: italic;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.541);
+  z-index: 1000;
 }
 
 /* 
@@ -375,10 +422,8 @@ body {
   height: 100vh;
   background-color: #040301;
   z-index: 1000;
-  animation: fadeOut 2s ease-out forwards;
-  animation-delay: 5s;
 }
-.loading .loading-txt {
+.loading .overlay-txt {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -386,6 +431,44 @@ body {
   color: #fef9dd;
   font-size: 3rem;
   font-weight: 700;
+}
+
+/* 
+    end-of-game
+*/
+#end-of-game .modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 45vw;
+  height: auto;
+  z-index: 200;
+}
+#end-of-game .end-of-game-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  color: #fef9dd;
+  font-size: 3rem;
+  font-weight: 600;
+  z-index: 250;
+}
+#end-of-game #username {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #8f21df;
+}
+#end-of-game #end-of-game-title {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #fef9dd;
 }
 
 /* 
@@ -408,7 +491,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.95);
   z-index: 100;
   transition: all ease-in-out 400ms;
 }
@@ -469,11 +552,6 @@ body {
 }
 #opponent-hero:hover {
   filter: drop-shadow(0 0 15px rgb(188, 100, 6));
-}
-
-#mana {
-  font-size: 2rem;
-  color: blue;
 }
 
 #user {
@@ -771,35 +849,18 @@ body {
 /*
     animations
 */
-@keyframes saturate {
-  0% {
-    filter: grayscale(35%);
-  }
-  25% {
-    filter: grayscale(30%);
-  }
-  50% {
-    filter: grayscale(45%);
-  }
-  75% {
-    filter: grayscale(30%);
-  }
-  100% {
-    filter: grayscale(40%);
-  }
-}
 @keyframes pulse {
   0% {
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
   25% {
-    transform: scale(1.01);
+    transform: translate(-50%, -50%) scale(1.01);
   }
   50% {
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
   75% {
-    transform: scale(1.01);
+    transform: translate(-50%, -50%) scale(1.01);
   }
 }
 @keyframes fadeOut {
@@ -810,22 +871,6 @@ body {
     opacity: 0;
   }
 }
-.fade-in {
-  animation: fadeIn ease 200ms;
-  -webkit-animation: fadeIn ease 200ms;
-  -moz-animation: fadeIn ease 200ms;
-  -o-animation: fadeIn ease 200ms;
-  -ms-animation: fadeIn ease 200ms;
-}
-
-.fade-out {
-  animation: fadeOut ease 200ms;
-  -webkit-animation: fadeOut ease 200ms;
-  -moz-animation: fadeOut ease 200ms;
-  -o-animation: fadeOut ease 200ms;
-  -ms-animation: fadeOut ease 200ms;
-}
-
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -834,10 +879,123 @@ body {
     opacity: 1;
   }
 }
+@keyframes flicker {
+  0% {
+    opacity: 0.4;
+  }
+  5% {
+    opacity: 0.5;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  30% {
+    opacity: 1;
+  }
+  35% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 0.25;
+  }
+  45% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/*
+    helper classes
+*/
+.fade-in {
+  animation: fadeIn ease 500ms;
+  -webkit-animation: fadeIn ease 500ms;
+  -moz-animation: fadeIn ease 500ms;
+  -o-animation: fadeIn ease 500ms;
+  -ms-animation: fadeIn ease 500ms;
+}
+
+.global-fade-in {
+  animation: fadeIn ease 2s;
+  -webkit-animation: fadeIn ease 2s;
+  -moz-animation: fadeIn ease 2s;
+  -o-animation: fadeIn ease 2s;
+  -ms-animation: fadeIn ease 2s;
+}
+
+.fade-out {
+  animation: fadeOut ease 500ms;
+  -webkit-animation: fadeOut ease 500ms;
+  -moz-animation: fadeOut ease 500ms;
+  -o-animation: fadeOut ease 500ms;
+  -ms-animation: fadeOut ease 500ms;
+}
+
+.pulse {
+  animation: pulse 3s ease-in-out infinite;
+  -webkit-animation: pulse 3s ease-in-out infinite;
+  -moz-animation: pulse 3s ease-in-out infinite;
+  -o-animation: pulse 3s ease-in-out infinite;
+  -ms-animation: pulse 3s ease-in-out infinite;
+}
+
+.grow-bot {
+  transform: scaleY(1) !important;
+}
+
+.grow-bot-reverse {
+  transform: scaleY(0) !important;
+}
+
+.grow-side {
+  transform: scaleX(0) !important;
+}
+
+.grow-side-reverse {
+  transform: scaleX(1) !important;
+}
+
+.grow-in {
+  transform: translate(-50%, -50%) scale(1) !important;
+}
+
+.grow-out {
+  transform: translate(-50%, -50%) scale(0.5) !important;
+}
+
 .is-turn {
   filter: drop-shadow(2px 2px 30px rgb(166, 0, 255)) !important;
 }
 
+.greyscale {
+  filter: grayscale(60%);
+  width: 2500px;
+}
+
+.greyscale-half {
+  filter: grayscale(30%);
+  width: 2500px;
+}
+
 .hidden {
-  display: none;
+  display: none !important;
 }/*# sourceMappingURL=global.css.map */
