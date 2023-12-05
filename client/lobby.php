@@ -73,10 +73,13 @@
         <iframe frameBorder="0" class="chat" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
     </div>
 
-    <div id="utils-wrapper-bg"  class="hidden">
+    <div class="overlay hidden">
         <div id="deck-builder-frame" class="hidden">
                 <iframe id="deck" style="height:90vh; width:90vw; " src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
         </div>
+    </div>
+
+    <div id="utils-wrapper-bg"  class="hidden">
         <div id="stats-wrapper" class="hidden">
             <div id="stats-chat">
                 <h1>Statistiques</h1>

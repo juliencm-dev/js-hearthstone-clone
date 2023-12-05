@@ -12,10 +12,10 @@
 
             $statement->execute();
             
-            $answers = null;
-            $answers = $statement->fetchAll();
+            $stats = null;
+            $stats = $statement->fetchAll();
 
-            return $answers;
+            return $stats;
         }
 
         public static function updatePlayCount($card_id){

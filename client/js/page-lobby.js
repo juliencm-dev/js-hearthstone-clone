@@ -84,13 +84,13 @@ const animate = () => {
     breathingLayers = document.querySelectorAll('.breathing');
     swirlNode = document.querySelector('.swirl');
 
-    const time = Date.now() * 0.002; // Base time factor for the sinusoidal movement
+    const time = Date.now() * 0.002; 
 
     breathingLayers.forEach(layer => {
 
         const speedX = parseFloat(layer.getAttribute('data-speedx'));
         const speedY = parseFloat(layer.getAttribute('data-speedy'));
-        const offsetX = Math.sin(time) * speedX * 25; // Adjust the multiplier as needed
+        const offsetX = Math.sin(time) * speedX * 25;
         const offsetY = Math.sin(time) * speedY;
     
         layer.style.transform = `translate(-50%, -50%) translate(${offsetX}px, ${offsetY}px)`;
@@ -113,27 +113,21 @@ const animate = () => {
 
 const toggleChat = () => {
     if (chatMenu.classList.contains('grow-bot')) {
-        chatMenu.classList.remove('grow-bot');
-        chatMenu.classList.add('grow-bot-reverse');
+        chatMenu.classList.toggle('grow-bot');
         chatMenu.classList.toggle('toggled');
     } else {
-        chatMenu.classList.remove('grow-bot-reverse');
-        chatMenu.classList.add('grow-bot');
+        chatMenu.classList.toggle('grow-bot');
         chatMenu.classList.toggle('toggled');
     }
 }
 
 const toggleMenus = () => {
     if (playMenu.classList.contains('grow-side')) {
-        playMenu.classList.remove('grow-side');
-        playMenu.classList.add('grow-side-reverse');
-        utilsMenu.classList.remove('grow-side');
-        utilsMenu.classList.add('grow-side-reverse');
+        playMenu.classList.toggle('grow-side');
+        utilsMenu.classList.toggle('grow-side');
     } else {
-        playMenu.classList.remove('grow-side-reverse');
-        playMenu.classList.add('grow-side');
-        utilsMenu.classList.remove('grow-side-reverse');
-        utilsMenu.classList.add('grow-side');
+        playMenu.classList.toggle('grow-side');
+        utilsMenu.classList.toggle('grow-side');
     }
 }
 
@@ -141,13 +135,11 @@ const toggleGameModeMenu = (type) => {
     setupBtnGameMode(type);
 
     if (gameModeMenu.classList.contains('grow-in')) {
-        gameModeMenu.classList.remove('grow-in');
-        gameModeMenu.classList.add('grow-out');
+        gameModeMenu.classList.toggle('grow-in');
         gameModeMenu.classList.toggle('toggled');
 
     } else {
-        gameModeMenu.classList.remove('grow-out');
-        gameModeMenu.classList.add('grow-in');
+        gameModeMenu.classList.toggle('grow-in');
         gameModeMenu.classList.toggle('toggled');
 
     }
@@ -155,9 +147,10 @@ const toggleGameModeMenu = (type) => {
 
 const toggleMainMenu = () => {
     if (gameModeMenu.classList.contains('grow-in')) {
-        gameModeMenu.classList.remove('grow-in');
-        gameModeMenu.classList.add('grow-out');
+        gameModeMenu.classList.toggle('grow-in');
         gameModeMenu.classList.toggle('toggled');
+    }else{
+        gameModeMenu.classList.toggle('grow-in');
     }
 
     setTimeout(() => { 
@@ -165,7 +158,7 @@ const toggleMainMenu = () => {
         resetModeMenu();
         setTimeout(() => {
             toggleMenus();
-        }, 1);
+        }, 5);
     }, 600);
 }
 
@@ -224,7 +217,7 @@ const selectModeMenu = (type) => {
         gameModeMenu.classList.toggle('hidden');
         setTimeout(() => {
             toggleGameModeMenu(type);
-        }, 1);
+        }, 5);
     }, 600);
 }
 
