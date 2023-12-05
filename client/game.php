@@ -37,11 +37,21 @@
 
 <div id="error-message-game" class="hidden pulse"></div>
 
+<!-- TODO: Finir intégration du chat -->
+
+<div id="chat-box" class="in-game hidden">
+        <iframe frameBorder="0" class="chat" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
+</div>
+
 <div id="game-wrapper">
     <div id="opponent">  
-        <div id="opponent-mana"></div>
-        
         <div id="opponent-life">30</div>
+        
+        <!-- TODO: Finir l'intégration -->
+        <div id="opponent-mana"></div>
+        <div id="opponent-card-count"></div>
+        <div id="opponent-card-hand"></div>
+
     </div>
 
     <div id="battlefield">
@@ -60,6 +70,11 @@
         <div id="user-hand"></div>
         <div id="user-life">30</div>
         <div id="user-mana">0</div>
+
+        <!-- TODO: Finir l'intégration -->
+        <div id="user-card-count"></div>
+        <div id="user-card-hand"></div>
+
     </div>
 </div>
 

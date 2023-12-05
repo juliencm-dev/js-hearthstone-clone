@@ -48,8 +48,9 @@ window.addEventListener("load", () => {
 
     userField.addEventListener('drop', (e) => {
         e.preventDefault();
-        const cardUid = e.dataTransfer.getData('text/plain');
-        playCard(cardUid);
+        const cardUid = e.dataTransfer.getData('text/uid');
+        const cardId = e.dataTransfer.getData('text/id');
+        playCard(cardUid, cardId);
     });
       
     userField.addEventListener('dragover', (e) => {
@@ -97,21 +98,6 @@ const state = () => {
     )
 }
 
-const updateDB = (actionList) => {
-    let formData = new FormData();
-    formData.append("type", "UPDATE");
-    formData.append("actionList", JSON.stringify(actionList));
-
-    fetch("ajax-game-action.php", {   
-            method : "POST", 
-            body: formData     
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        updateUI(data);
-    })
-}
 
 const displayError = (message) => {
     const errorMessage = document.querySelector("#error-message-game");
@@ -176,7 +162,7 @@ const updateUI = (gameState) => {
 
             opponentHeroNode.addEventListener('drop', (e) => {
                 e.preventDefault();
-                const attackerUid = e.dataTransfer.getData('text/plain');
+                const attackerUid = e.dataTransfer.getData('text/uid');
                 attackCard(attackerUid, 0);
             });
 
@@ -225,7 +211,8 @@ const updateUI = (gameState) => {
                 }
 
                 newCardNode.addEventListener('dragstart', (e) => {
-                    e.dataTransfer.setData('text/plain', currentCard.uid);
+                    e.dataTransfer.setData('text/uid', currentCard.uid);
+                    e.dataTransfer.setData('text/id', currentCard.id);
                 });
 
                 newCardNode.addEventListener('dragend', (e) => {
@@ -281,7 +268,7 @@ const surrender = () => {
     })
 }
 
-const playCard = (uid) => {
+const playCard = (uid, id) => {
     let formData = new FormData();
     formData.append("type", "PLAY");
     formData.append("uid", uid);
@@ -293,6 +280,7 @@ const playCard = (uid) => {
     .then(response => response.json())
     .then(data => {
         updateUI(data);
+        updateCardPlayCount(id);
     })
 }
 
@@ -353,7 +341,7 @@ const renderBattlefieldState = (gameState) => {
         let newCardNode = newCard.buildCard()
 
         newCardNode.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', currentCard.uid);
+            e.dataTransfer.setData('text/uid', currentCard.uid);
         }); 
 
         userField.append(newCardNode);
@@ -375,7 +363,7 @@ const renderBattlefieldState = (gameState) => {
 
         newCardNode.addEventListener('drop', (e) => {
             e.preventDefault();
-            const attackerUid = e.dataTransfer.getData('text/plain');
+            const attackerUid = e.dataTransfer.getData('text/uid');
             attackCard(attackerUid, currentCard.uid);
         });
           
@@ -400,21 +388,17 @@ const setEndOfGameOverlay = (result) => {
     }
 }
 
-// const heroPowerAnimation = () => {
-//     let angle = 0;
-//     const rotationSpeed = 6; // Degrees per interval
-//     const intervalTime = 10; // Milliseconds per interval
-//     const totalRotationTime = 360 / rotationSpeed * intervalTime; // Total time to complete 360 degrees
+const updateCardPlayCount = (card_id) => {
+    let formData = new FormData();
+    formData.append("card_id", card_id);
 
-//     const interval = setInterval(() => {
-//         angle += rotationSpeed;
-//         userHeroNode.style.transform = `rotate(${angle}deg)`;
-//     }, intervalTime);
-
-//     setTimeout(() => {
-//         clearInterval(interval);
-//         // Reset to the original position
-//         userHeroNode.style.transform = 'rotate(0deg)';
-//     }, totalRotationTime);
-// }
+    fetch("ajax-db-action.php", {   
+            method : "POST", 
+            body: formData     
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+}
 

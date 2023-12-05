@@ -392,6 +392,7 @@ body{
     top:50%;
     left:50%;
 
+    opacity: 0;
     transform: translate(-50%, -50%) scale(0.5);
     transition: all 500ms ease-in-out;
 
@@ -1218,10 +1219,12 @@ body{
 
 .grow-in {
     transform: translate(-50%, -50%) scale(1) !important;
+    opacity: 1;
 }
 
 .grow-out {
     transform: translate(-50%, -50%) scale(0.5) !important;
+    opacity:0;
 }
 
 .is-turn{
