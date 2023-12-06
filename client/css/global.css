@@ -1037,10 +1037,6 @@ body {
 
 .pulse {
   animation: pulse 3s ease-in-out infinite;
-  -webkit-animation: pulse 3s ease-in-out infinite;
-  -moz-animation: pulse 3s ease-in-out infinite;
-  -o-animation: pulse 3s ease-in-out infinite;
-  -ms-animation: pulse 3s ease-in-out infinite;
 }
 
 .grow-bot {
