@@ -10,18 +10,19 @@
 'use strict'
 
 let swirlNode, breathingLayers, swirlRotation = 0, swirlRotationSpeed = 0.15, swirlRotationMax = 360;
-let privateNode, playMenu, utilsMenu, chatMenu, gameModeMenu;
+let privateNode, playMenu, utilsMenu, chatMenu, gameModeMenu, utilsWrapper;
 
 window.addEventListener('load', () => {
     const buttons = document.querySelectorAll('.mode');
+    const utilsButtons = document.querySelectorAll('.utils');
     const deckBuilder = document.querySelector("#deck-builder");
-    const overlay = document.querySelector(".overlay");
     const btnObserve = document.querySelector("#btn-observer");
     playMenu = document.querySelector("#play-menu-bg");
     utilsMenu = document.querySelector("#utils-menu-bg");
     gameModeMenu = document.querySelector('#game-mode-bg');
     privateNode = document.querySelector("#private");
     chatMenu = document.querySelector('#chat-box');
+    utilsWrapper = document.querySelector('#utils-wrapper-bg');
 
     btnObserve.addEventListener("click", () => {
         observeGame();
@@ -41,6 +42,8 @@ window.addEventListener('load', () => {
             if (e.key === 'Escape'){
                 if (gameModeMenu.classList.contains('toggled')) {
                     toggleMainMenu();
+                } else if (utilsWrapper.classList.contains('toggled')) {
+                    toggleMainMenuUtils();
                 }
             }
         }
@@ -53,15 +56,12 @@ window.addEventListener('load', () => {
         });
     });
     
-    deckBuilder.addEventListener("click", () => {
-        document.querySelector("#deck-builder-frame").classList.toggle("hidden");
-        document.querySelector(".overlay").classList.toggle("hidden");
+    utilsButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const mode = this.getAttribute('value');
+            selectUtilsMenu(mode);
+        });
     });
-
-    overlay.addEventListener("click", () => {
-        document.querySelector("#deck-builder-frame").classList.toggle("hidden");
-        document.querySelector(".overlay").classList.toggle("hidden");
-    })
 
     animate();
 
@@ -145,6 +145,28 @@ const toggleGameModeMenu = (type) => {
     }
 }
 
+const toggleUtilsMenu = () => {
+    if (utilsWrapper.classList.contains('grow-in')) {
+        utilsWrapper.classList.toggle('grow-in');
+        utilsWrapper.classList.toggle('toggled');
+    } else {
+        utilsWrapper.classList.toggle('grow-in');
+        utilsWrapper.classList.toggle('toggled');
+    }
+}
+
+const toggleMainMenuUtils = () => {
+    toggleUtilsMenu();
+
+    setTimeout(() => { 
+        utilsWrapper.classList.toggle('hidden');
+        resetModeMenu();
+        setTimeout(() => {
+            toggleMenus();
+        }, 5);
+    }, 600);
+}
+
 const toggleMainMenu = () => {
     if (gameModeMenu.classList.contains('grow-in')) {
         gameModeMenu.classList.toggle('grow-in');
@@ -196,7 +218,27 @@ const setupBtnGameMode = (type) => {
 
 }
 
+const selectUtilsMenu = (type) => {
+    if (type === "DECK") {
+        document.querySelector("#deck-builder-frame").classList.toggle("hidden");
+    } else if (type === "STATS") {
+        document.querySelector("#stats-wrapper").classList.toggle("hidden");
+
+    }
+
+    toggleMenus();
+
+    setTimeout(() => {
+        utilsWrapper.classList.toggle('hidden');
+        setTimeout(() => {
+            toggleUtilsMenu();
+        }, 2);
+    }, 600);
+
+}
+
 const selectModeMenu = (type) => {
+
     if (type === "PVP") {
         privateNode.classList.toggle("hidden");
     }
@@ -217,7 +259,7 @@ const selectModeMenu = (type) => {
         gameModeMenu.classList.toggle('hidden');
         setTimeout(() => {
             toggleGameModeMenu(type);
-        }, 5);
+        }, 2);
     }, 600);
 }
 
@@ -225,6 +267,9 @@ const resetModeMenu = () => {
     privateNode.classList.add("hidden");
     document.querySelector("#arena-mode").classList.add("hidden");
     document.querySelector("#standard-mode").classList.add("hidden");
+    document.querySelector("#deck-builder-frame").classList.add("hidden");
+    document.querySelector("#stats-wrapper").classList.add("hidden");
+
 }
 
 // AJAX CALLS

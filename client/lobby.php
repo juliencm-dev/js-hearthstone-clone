@@ -40,8 +40,8 @@
     
     <div id="utils-menu-bg">
         <div class="utils-menu-wrapper">
-            <button class="btn">Statistiques</button>
-            <button id="deck-builder" class="btn">Deck Builder</button>
+            <button class="btn utils" value="STATS">Statistiques</button>
+            <button id="deck-builder" class="btn utils" value="DECK">Deck Builder</button>
             <div class="observer-wrapper">
                 <button id="btn-observer" class="btn">Observer</button>
                 <input type="text" id="username" class="input-field" placeholder="Nom du joueur">
@@ -72,20 +72,53 @@
     <div id="chat-box" class="">
         <iframe frameBorder="0" class="chat" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
     </div>
-
-    <div class="overlay hidden">
-        <div id="deck-builder-frame" class="hidden">
-                <iframe id="deck" style="height:90vh; width:90vw; " src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
-        </div>
-    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <div id="utils-wrapper-bg"  class="hidden">
+        <div id="deck-builder-frame" class="hidden">
+            <iframe id="deck" style = "height: 65vh; width: 60vw;" frameBorder="0" src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
+        </div>   
         <div id="stats-wrapper" class="hidden">
-            <div id="stats-chat">
+            <div id="stats-chart">
                 <h1>Statistiques</h1>
+                <canvas id="pie-chart"></canvas>
+                <script>
+                    const data = {
+                        labels: ['Simple', 'Double', 'Suite'],
+                        datasets: [{
+                            label: 'Types de chambre',
+                            data: [12,12,12,34,654,34],
+                            color: "#fff",
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)'
+                            ],
+                        }]
+                    };
+
+                    const config = {
+                        type: 'pie',
+                        data: data,
+                        options: {
+                            plugins: {
+                                legend: {
+                                    labels: {
+                                        color: 'white'
+                                    }
+                                }
+                            }
+                        }
+                    };
+
+                    new Chart(document.getElementById('pie-chart'), config);
+                </script>
             </div>
-            <button id="reset-stats" class="btn">Reset</button>
-            <button id="export-csv" class="btn">Exporter</button>
+            <div class="btn-wrapper">
+                <button id="reset-stats" class="btn">Reset</button>
+                <button id="export-csv" class="btn">Exporter</button>
+            </div>
         </div>
     </div>
 
