@@ -12,8 +12,8 @@
             $data = [];
             $data["key"] = $_SESSION["key"];
 
-            if(!empty($_POST["observer"])){
-                $_SESSION["observer"] = $_POST["observer"];
+            if(!empty($_POST["username"])){
+                $_SESSION["observer"] = $_POST["username"];
                 $data["username"] = $_SESSION["observer"];
                 
                 $result = parent::callAPI("games/observe", $data);
@@ -45,10 +45,7 @@
                 }
 
             }
-            else{
-                $result = "ERROR";
-                $errorMessage = "Veuillez entrer un nom d'utilisateur";
-            }
+        
             return compact("result","errorMessage");
         }
 }

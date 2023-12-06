@@ -27,6 +27,16 @@
             $statement->execute();
 
             return "Success";
+        
+        }
+        public static function resetStats(){
+            $connection = Connection::getConnection();
+
+            $statement = $connection->prepare("UPDATE statistique_magix SET play_count = 0  WHERE card_id != 0");
+
+            $statement->execute();
+
+            return "Reset";
         }
 
         public static function addCard($card_id){

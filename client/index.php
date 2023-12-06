@@ -21,7 +21,7 @@
   <img src="./img/background/front-page/bg_0000_bg-7.png" class="bg-5">
 </div>
 
-<div class="logo pulse <?=$data["hasConnectionError"] ? "hidden" : ""?>">
+<div class="logo <?=$data["hasConnectionError"] ? "hidden" : ""?>">
   <img src="./img/magix-logo.png" id="logo-magix">
   <div class="logo-text">Appuyez sur ENTRER</div>
 </div>

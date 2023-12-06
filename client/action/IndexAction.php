@@ -10,6 +10,11 @@
 		protected function executeAction() {
 			$hasConnectionError = false;
 
+			if($_SESSION["visibility"] == CommonAction::$VISIBILITY_MEMBER){
+				header("location:lobby.php");
+				exit;
+			}
+
 			if (isset($_POST["username"])) {
 				$user = [];
 				$user["username"] = $_POST["username"];
@@ -22,7 +27,6 @@
 						$hasConnectionError = true;
 					}
 					else {
-						// var_dump($result);exit;
 						$_SESSION["username"] = $user["username"];
 						$_SESSION["key"] = $result->key; 
 						$_SESSION["visibility"] = CommonAction::$VISIBILITY_MEMBER;

@@ -22,7 +22,6 @@ if(timingSparks <= 0){
 
 window.addEventListener("load", () => {
 
-
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Enter'){
             document.querySelector('.logo').classList.add('hidden');
@@ -30,6 +29,10 @@ window.addEventListener("load", () => {
         }
     });
 
+    document.querySelector("#btn-connect").addEventListener("click", ()=>{
+        let username = document.querySelector("#username").value
+        localStorage.setItem('user', username)
+    })
     animate();
 
 })

@@ -53,6 +53,8 @@ body{
     font-size: 2rem;
     color: #fef9dd;
 
+    z-index: 400;
+
     #logo-magix{
         filter: drop-shadow(30px 30px 60px black);
     }
@@ -241,8 +243,8 @@ body{
     top: 52%;
     left: 50%;
 
-    height: 86vh;
-    width: 75vw;
+    height: 42vw;
+    width: 65vw;
 
     background-image: url(../img/ui/utils-bg.png);
     background-size: cover;
@@ -288,6 +290,14 @@ body{
     h1{
         text-align: center;
         margin-bottom: 1vh;
+    }
+
+    #stats{
+        position: absolute;
+        top:20vh;
+
+        text-align: center;
+        font-size: 1.8rem; 
     }
 
 }
@@ -406,6 +416,37 @@ body{
     }
 }
 
+.in-game {
+    position: absolute;
+    top: 5vh;
+    left: 5vh;
+
+    width: 69.32vh;
+    height: 38vh;
+
+    transition: all 500ms ease-in-out;
+    opacity: 0;
+
+    background-image: url(../img/lobby-ui-chat.png);
+    background-size: cover;
+    z-index: 10;
+
+    .chat{
+        position: absolute;
+        top: 2.5vw;
+        left: 2.2vw;
+
+        width: 30vw;
+        height: 22vh;
+
+        transform-origin: bottom;
+
+        padding: 0.5rem;
+    }
+
+    filter: drop-shadow(2px 2px 10px black);
+}
+
 
 #chat-box{
     position: absolute;
@@ -458,7 +499,7 @@ body{
 
     z-index: 350;
     
-    .mode-wrapper{
+    .game-mode-wrapper{
         position: absolute;
         top:50%;
         left:50%;
@@ -479,32 +520,54 @@ body{
         font-weight: 600;
 
         z-index: 350;
+        
+        .btn-wrapper{
+            display: flex;
+            flex-direction: row;
+            gap: 3.5vw;
+        }
+    
+        #private{
+            padding: 1rem 3rem;
+            background-color: #04030153;
+            border-radius: 0.5rem;
+    
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+    
+            font-size: 1.5rem;
+            font-weight: 400;
+            font-style: italic;
+    
+            align-items: center;
+            justify-content: center;
+        }
     }
 
-    .btn-wrapper{
-        display: flex;
-        flex-direction: row;
-        gap: 3.5vw;
-    }
-
-    #private{
-        padding: 1rem 3rem;
-        background-color: #04030153;
-        border-radius: 0.5rem;
-
-        display: flex;
-        flex-direction: column;
-        gap: 1vw;
-
-        font-size: 1.5rem;
-        font-weight: 400;
-        font-style: italic;
-
-        align-items: center;
-        justify-content: center;
-    }
 
     filter: drop-shadow(2px 2px 10px black);
+}
+
+#greetings{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+
+    text-align: center;
+
+    transform: translate(-50%, -50%);
+
+    color: #ededed;
+
+    font-size: 4rem;
+    font-weight: 700;
+    font-style: italic;
+
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgba(0, 0, 0, 0.541);
+
+    z-index: 1000;
 }
 
 
@@ -1268,6 +1331,10 @@ body{
 
 .grow-in {
     transform: translate(-50%, -50%) scale(1) !important;
+    opacity: 1 !important;
+}
+
+.fade-in{
     opacity: 1 !important;
 }
 

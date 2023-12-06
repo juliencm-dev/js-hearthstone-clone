@@ -23,6 +23,7 @@
     <div class="lobby-bg"></div>
     
     <div id="error-message" class="hidden pulse"></div>
+    <div id="greetings"></div>
 
     <div id="play-menu-bg">
         <div class="play-menu-wrapper">
@@ -52,19 +53,17 @@
 
     <div id="game-mode-bg"  class="hidden">
         <div class="game-mode-wrapper">
-            <div class="mode-wrapper">
-                <div id="standard-mode" class="btn-wrapper hidden">
-                    <button class="btn" id="standard" value="STANDARD">Jouer solo</button>
-                    <button class="btn" id="coop" value="COOP">Jouer Co-Op</button>
-                </div>
-                <div id="arena-mode" class="btn-wrapper hidden">
-                    <button class="btn" id="training" value="TRAINING">Pratique</button>
-                    <button class="btn" id="pvp" value="PVP">PvP</button>
-                </div>
-                <div id="private" class="hidden">
-                    <label >Entrez un identifiant unique afin de jouer avec un ami:</label>
-                    <input type="text" name="privateKey" name="privateKey" class="input-field" placeholder="Clé privée (optionnel)">
-                </div>
+            <div id="standard-mode" class="btn-wrapper hidden">
+                <button class="btn" id="standard" value="STANDARD">Jouer solo</button>
+                <button class="btn" id="coop" value="COOP">Jouer Co-Op</button>
+            </div>
+            <div id="arena-mode" class="btn-wrapper hidden">
+                <button class="btn" id="training" value="TRAINING">Pratique</button>
+                <button class="btn" id="pvp" value="PVP">PvP</button>
+            </div>
+            <div id="private" class="hidden">
+                <label >Entrez un identifiant unique afin de jouer avec un ami:</label>
+                <input type="text" id="privateKey" name="privateKey" class="input-field" placeholder="Clé privée (optionnel)">
             </div>
         </div>
     </div>
@@ -77,52 +76,16 @@
 
     <div id="utils-wrapper-bg"  class="hidden">
         <div id="deck-builder-frame" class="hidden">
-            <iframe id="deck" style = "height: 65vh; width: 60vw;" frameBorder="0" src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
+            <iframe id="deck" style = "height: 30vw; width: 58vw;" frameBorder="0" src="https://magix.apps-de-cours.com/server/#/deck/<?= $data["key"] ?>"></iframe>
         </div>   
         <div id="stats-wrapper" class="hidden">
             <div id="stats-chart">
                 <h1>Statistiques</h1>
                 <canvas id="pie-chart" style="height:500px; width:500px;"></canvas>
-                <script>
-                    const data = {
-                        labels: ['Simple', 'Double', 'Suite'],
-                        datasets: [{
-                            label: 'Types de chambre',
-                            data: [12,12,12,34,654,34],
-                            color: "#fff",
-                            backgroundColor: [
-                                'rgb(161, 94, 34)',
-                                'rgb(208, 148, 91)',
-                                'rgb(98, 43, 5)'
-                            ],
-                        }]
-                    };
-
-                    const config = {
-                        type: 'pie',
-                        data: data,
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    y: 100,
-                                    position: 'right',
-                                    labels: {
-                                        color: 'white'
-                                    }
-                                }
-                            }
-                        }
-                    };
-
-                    let chart = new Chart(document.getElementById('pie-chart'), config);
-                    chart.resize(500, 500)
-
-                </script>
             </div>
             <div class="btn-wrapper">
-                <button id="reset-stats" class="btn">Reset</button>
-                <button id="export-csv" class="btn">Exporter</button>
+                <button id="reset-stats" value="RESET" class="btn">Reset</button>
+                <button id="export-csv" value="EXPORT" class="btn">Exporter</button>
             </div>
         </div>
     </div>

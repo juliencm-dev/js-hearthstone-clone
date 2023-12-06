@@ -11,8 +11,14 @@
 
         protected function executeAction() {
             
-            if(!empty($_POST["card_id"])){
-                $result = DataDao::updatePlayCount($_POST["card_id"]);
+            if(!empty($_POST["cardId"])){
+                $result = DataDao::updatePlayCount($_POST["cardId"]);
+            }
+            if(!empty($_POST["getPlayCount"])){
+                $result = DataDao::getStats();
+            }
+            if(!empty($_POST["reset"])){
+                $result = DataDao::resetStats();
             }
 
             return compact('result');

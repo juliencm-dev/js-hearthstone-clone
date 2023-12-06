@@ -37,10 +37,9 @@
 
 <div id="error-message-game" class="hidden pulse"></div>
 
-<!-- TODO: Finir intégration du chat -->
 
-<div id="chat-box" class="in-game hidden">
-        <iframe frameBorder="0" class="chat" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
+<div class="in-game hidden">
+    <iframe frameBorder="0" class="chat" onload="applyStyles(this)" src="https://magix.apps-de-cours.com/server/#/chat/<?= $data["key"]?>"> </iframe>
 </div>
 
 <div id="game-wrapper">

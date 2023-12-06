@@ -10,12 +10,11 @@
 'use strict'
 
 let swirlNode, breathingLayers, swirlRotation = 0, swirlRotationSpeed = 0.15, swirlRotationMax = 360;
-let privateNode, playMenu, utilsMenu, chatMenu, gameModeMenu, utilsWrapper;
+let privateNode, playMenu, utilsMenu, chatMenu, gameModeMenu, utilsWrapper, chart;
 
 window.addEventListener('load', () => {
     const buttons = document.querySelectorAll('.mode');
     const utilsButtons = document.querySelectorAll('.utils');
-    const deckBuilder = document.querySelector("#deck-builder");
     const btnObserve = document.querySelector("#btn-observer");
     playMenu = document.querySelector("#play-menu-bg");
     utilsMenu = document.querySelector("#utils-menu-bg");
@@ -27,6 +26,14 @@ window.addEventListener('load', () => {
     btnObserve.addEventListener("click", () => {
         observeGame();
     });
+
+    const user = localStorage.getItem("user");
+        
+    document.querySelector("#greetings").textContent = `Bienvenue ${user} !`;
+
+    setTimeout(()=>{
+        document.querySelector("#greetings").classList.add("hidden");
+    }, 3000)
 
     window.addEventListener('keydown', (e) => {
 
@@ -59,6 +66,10 @@ window.addEventListener('load', () => {
     utilsButtons.forEach(button => {
         button.addEventListener("click", function () {
             const mode = this.getAttribute('value');
+
+            if(mode === "STATS"){
+                getStats()
+            }
             selectUtilsMenu(mode);
         });
     });
@@ -108,6 +119,62 @@ const animate = () => {
     window.requestAnimationFrame(animate);
 
 }
+
+const configureChart = (dataList) => {
+    let playCount = []
+    let legendLabels = []
+    let totalPlay = 0
+
+    if (chart != undefined){
+        chart.destroy()
+    }
+    
+    if(dataList !== "RESET"){
+
+        dataList.forEach((data) =>{
+            totalPlay += data.play_count
+        })
+    
+        dataList.forEach((data) =>{
+            playCount.push(data.play_count)
+            legendLabels.push(`Carte : ${data.card_id} - ${Math.round(data.play_count / totalPlay * 100)}%`);
+        })
+        const data = {
+            labels: legendLabels,
+            datasets: [{
+                labels: legendLabels,
+                data: playCount,
+                color: "#fff",
+                backgroundColor: [
+                    'rgb(161, 94, 34)',
+                    'rgb(208, 148, 91)',
+                    'rgb(98, 43, 5)'
+                ],
+            }]
+        };
+    
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        y: 100,
+                        position: 'right',
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                }
+            }
+        };
+    
+        chart = new Chart(document.getElementById('pie-chart'), config);
+        chart.resize(400, 600)
+    }
+}
+
 
 // MENU FUNCTIONS
 
@@ -194,7 +261,7 @@ const setupBtnGameMode = (type) => {
         if (type === "TRAINING") {
             playTraining(type,'STANDARD');
         }else {
-            const privateKey = document.querySelector("#private-key").value;
+            const privateKey = document.querySelector("#privateKey").value;
             playPvp(type, 'STANDARD', privateKey);
         }
     });
@@ -203,7 +270,7 @@ const setupBtnGameMode = (type) => {
         if (type === "TRAINING") {
             playTraining(type, 'COOP');
         }else {
-            const privateKey = document.querySelector("#private-key").value;
+            const privateKey = document.querySelector("#privateKey").value;
             playPvp(type, 'COOP', privateKey);
         }
     });
@@ -224,6 +291,15 @@ const selectUtilsMenu = (type) => {
     } else if (type === "STATS") {
         document.querySelector("#stats-wrapper").classList.toggle("hidden");
 
+        document.querySelector("#reset-stats").addEventListener("click", () =>{
+            const mode = document.querySelector("#reset-stats").value 
+            getStats(mode)
+        })
+
+        document.querySelector("#export-csv").addEventListener("click", () =>{
+            const mode = document.querySelector("#export-csv").value 
+            getStats(mode)
+        })
     }
 
     toggleMenus();
@@ -238,10 +314,6 @@ const selectUtilsMenu = (type) => {
 }
 
 const selectModeMenu = (type) => {
-
-    if (type === "PVP") {
-        privateNode.classList.toggle("hidden");
-    }
 
     if (type === "ARENA") {
         document.querySelector("#arena-mode").classList.toggle("hidden");
@@ -274,11 +346,61 @@ const resetModeMenu = () => {
 
 // AJAX CALLS
 
+const getStats = async (mode = false) =>{
+    let formData = new FormData();
+
+    if (!mode){
+        formData.append("getPlayCount", true);
+    }else if (mode === "RESET"){
+        formData.append("reset", true);
+    }else if (mode === "EXPORT"){
+        formData.append("getPlayCount", true);
+    }
+
+    try {
+        const response = await fetch("ajax-db-action.php", {
+            method: "POST",
+            body: formData
+        });
+        const dataList = await response.json();
+        if (mode === "EXPORT"){
+
+            // La portion sur l'exportation CSV a été adapter d'une réponse dans ce thread :
+            // https://stackoverflow.com/questions/14964035/how-to-export-javascript-array-info-to-csv-on-client-side
+
+            let rows = []
+            dataList.forEach((data) =>{
+                let temp = [`id: ${data.card_id}`,`playCount: ${data.play_count}`]
+                rows.push(temp)
+            })                
+            
+            let csvContent = "data:text/csv;charset=utf-8," 
+                + rows.map(e => e.join(",")).join("\n");
+
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+
+            link.classList.add("hidden");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "my_data.csv");
+            document.body.appendChild(link);
+
+            link.click();
+        } else{
+            configureChart(dataList)
+        }
+
+    } catch (error) {
+        console.error('Error during fetch operation:', error);
+    }
+
+}
+
 const observeGame = async () => {
     let value = document.querySelector("#username").value;
 
     let formData = new FormData();
-    formData.append("observer", value);
+    formData.append("username", value);
 
     try {
         const response = await fetch("ajax-lobby-action.php", {

@@ -15,7 +15,7 @@ let swirlNode, swirlRotation = 0, swirlRotationSpeed = 0.15, swirlRotationMax = 
 
 let userHeroNode, userMana, userHP, currentMana, userNode, userHand, userField;
 let opponentName = "", opponentNode, opponentMana, opponentHP;
-let waitingOverlay, endOfGameOverlay, btnQuitGame;
+let waitingOverlay, endOfGameOverlay, btnQuitGame, chatMenu;
 
 window.addEventListener("load", () => {
     timer = document.querySelector("#turn-timer");
@@ -31,10 +31,25 @@ window.addEventListener("load", () => {
     waitingOverlay = document.querySelector('#waiting');
     endOfGameOverlay = document.querySelector('#end-of-game');
     btnEndTurn = document.querySelector("#end-turn");
+    chatMenu = document.querySelector(".in-game");
 
     btnEndTurn.addEventListener("click", endTurn);
     document.querySelector("#surrender").addEventListener("click", surrender);
     document.querySelector("#btn-leave").addEventListener("click", () => location.href = "/lobby.php");
+
+    window.addEventListener('keydown', (e) => {
+
+        const keysToPrevent = ['Enter'];
+
+        if (keysToPrevent.includes(e.key)){
+            e.preventDefault();
+            
+            if (e.key === 'Enter') {
+                toggleChat();   
+            }
+    
+        }
+    });
 
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape'){
@@ -63,6 +78,19 @@ window.addEventListener("load", () => {
     animate();
 });
 
+const applyStyles = iframe => {
+	let styles = {
+		fontGoogleName : "Roboto",
+		fontSize : "16px",
+		hideIcons : false,
+        hideScrollBar : true,
+	}
+	
+	setTimeout(() => {
+		iframe.contentWindow.postMessage(JSON.stringify(styles), "*");	
+}, 100);
+}
+
 const animate = () => {
     swirlNode = document.querySelector('#halo');
 
@@ -78,6 +106,18 @@ const animate = () => {
     window.requestAnimationFrame(animate);
 }
 
+const toggleChat = () => {
+    if (chatMenu.classList.contains('fade-in')) {
+        chatMenu.classList.toggle('fade-in');
+        chatMenu.classList.toggle('hidden');
+    } else {
+        chatMenu.classList.toggle('fade-in');
+
+        setTimeout(()=>{
+            chatMenu.classList.toggle('hidden');
+        }, 500)
+    }
+}
 
 const state = () => {
     fetch("ajax-state.php", {   // Il faut créer cette page et son contrôleur appelle 
@@ -85,8 +125,6 @@ const state = () => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data); // contient les cartes/état du jeu.
-
         updateUI(data);
 
         if (data == "LAST_GAME_LOST" || data == "LAST_GAME_WON"){
@@ -264,7 +302,6 @@ const surrender = () => {
     })
     .then(response => response.json())
     .then(data => {
-        location.href = "/lobby.php"
     })
 }
 
@@ -296,7 +333,6 @@ const attackCard = (uid, targetuid) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
         updateUI(data);
     })
 }
@@ -388,9 +424,9 @@ const setEndOfGameOverlay = (result) => {
     }
 }
 
-const updateCardPlayCount = (card_id) => {
+const updateCardPlayCount = (cardId) => {
     let formData = new FormData();
-    formData.append("card_id", card_id);
+    formData.append("cardId", cardId);
 
     fetch("ajax-db-action.php", {   
             method : "POST", 
@@ -398,7 +434,6 @@ const updateCardPlayCount = (card_id) => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log(data);
     })
 }
 
