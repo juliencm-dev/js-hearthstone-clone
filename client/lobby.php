@@ -82,7 +82,7 @@
         <div id="stats-wrapper" class="hidden">
             <div id="stats-chart">
                 <h1>Statistiques</h1>
-                <canvas id="pie-chart"></canvas>
+                <canvas id="pie-chart" style="height:500px; width:500px;"></canvas>
                 <script>
                     const data = {
                         labels: ['Simple', 'Double', 'Suite'],
@@ -91,9 +91,9 @@
                             data: [12,12,12,34,654,34],
                             color: "#fff",
                             backgroundColor: [
-                                'rgb(255, 99, 132)',
-                                'rgb(54, 162, 235)',
-                                'rgb(255, 205, 86)'
+                                'rgb(161, 94, 34)',
+                                'rgb(208, 148, 91)',
+                                'rgb(98, 43, 5)'
                             ],
                         }]
                     };
@@ -102,8 +102,11 @@
                         type: 'pie',
                         data: data,
                         options: {
+                            responsive: true,
                             plugins: {
                                 legend: {
+                                    y: 100,
+                                    position: 'right',
                                     labels: {
                                         color: 'white'
                                     }
@@ -112,7 +115,9 @@
                         }
                     };
 
-                    new Chart(document.getElementById('pie-chart'), config);
+                    let chart = new Chart(document.getElementById('pie-chart'), config);
+                    chart.resize(500, 500)
+
                 </script>
             </div>
             <div class="btn-wrapper">

@@ -249,6 +249,10 @@ body {
   transform: translateX(-50%);
   z-index: 1000;
 }
+#stats-chart h1 {
+  text-align: center;
+  margin-bottom: 1vh;
+}
 
 .btn-wrapper {
   position: absolute;

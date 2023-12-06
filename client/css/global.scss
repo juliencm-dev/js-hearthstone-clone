@@ -284,6 +284,12 @@ body{
 
     transform: translateX(-50%);
     z-index: 1000;
+
+    h1{
+        text-align: center;
+        margin-bottom: 1vh;
+    }
+
 }
 
 .btn-wrapper{
