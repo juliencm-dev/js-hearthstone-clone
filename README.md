@@ -30,7 +30,7 @@ I've taken the time to generate assets for this game from the ground up using Mi
 
 ## Contact
 
-For any inquiries or feedback, please contact [your-email@example.com].
+For any inquiries or feedback, please contact [hello@juliencm.dev].
 
 ---
 
